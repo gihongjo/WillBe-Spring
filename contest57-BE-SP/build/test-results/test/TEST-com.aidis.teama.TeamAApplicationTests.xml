@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.aidis.teama.TeamAApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-31T02:31:06" hostname="Gihongui-MacBookAir.local" time="0.301">
+  <properties/>
+  <testcase name="contextLoads()" classname="com.aidis.teama.TeamAApplicationTests" time="0.301"/>
+  <system-out><![CDATA[11:31:04.594 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.aidis.teama.TeamAApplicationTests]: TeamAApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+11:31:04.634 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.aidis.teama.TeamAApplication for test class com.aidis.teama.TeamAApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.1)
+
+2024-08-31T11:31:04.772+09:00  INFO 7438 --- [teamA] [    Test worker] com.aidis.teama.TeamAApplicationTests    : Starting TeamAApplicationTests using Java 17.0.10 with PID 7438 (started by gihongjo in /Users/gihongjo/AidisLab/contest57/TeamA/contest57-server/teamA)
+2024-08-31T11:31:04.773+09:00  INFO 7438 --- [teamA] [    Test worker] com.aidis.teama.TeamAApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2024-08-31T11:31:05.013+09:00  INFO 7438 --- [teamA] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-31T11:31:05.033+09:00  INFO 7438 --- [teamA] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 1 JPA repository interface.
+2024-08-31T11:31:05.208+09:00  INFO 7438 --- [teamA] [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-31T11:31:05.227+09:00  INFO 7438 --- [teamA] [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-31T11:31:05.238+09:00  INFO 7438 --- [teamA] [    Test worker] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-08-31T11:31:05.339+09:00  INFO 7438 --- [teamA] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-31T11:31:05.349+09:00  INFO 7438 --- [teamA] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-08-31T11:31:05.598+09:00  INFO 7438 --- [teamA] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3ba97962
+2024-08-31T11:31:05.600+09:00  INFO 7438 --- [teamA] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-08-31T11:31:05.643+09:00  WARN 7438 --- [teamA] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-08-31T11:31:05.934+09:00  INFO 7438 --- [teamA] [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-31T11:31:05.976+09:00  INFO 7438 --- [teamA] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-31T11:31:06.075+09:00  WARN 7438 --- [teamA] [    Test worker] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.OncePerRequestFilter.doFilter(jakarta.servlet.ServletRequest,jakarta.servlet.ServletResponse,jakarta.servlet.FilterChain) throws jakarta.servlet.ServletException,java.io.IOException] because it is marked as final, consider using interface-based JDK proxies instead.
+2024-08-31T11:31:06.076+09:00  WARN 7438 --- [teamA] [    Test worker] o.s.aop.framework.CglibAopProxy          : Unable to proxy interface-implementing method [public final void org.springframework.web.filter.GenericFilterBean.init(jakarta.servlet.FilterConfig) throws jakarta.servlet.ServletException] because it is marked as final, consider using interface-based JDK proxies instead.
+2024-08-31T11:31:06.102+09:00  WARN 7438 --- [teamA] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-31T11:31:06.111+09:00  INFO 7438 --- [teamA] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-08-31T11:31:06.400+09:00  INFO 7438 --- [teamA] [    Test worker] com.aidis.teama.TeamAApplicationTests    : Started TeamAApplicationTests in 1.678 seconds (process running for 2.161)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
