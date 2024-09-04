@@ -33,7 +33,7 @@ public class UserApiController {
     ) {
         log.info(userRequest.toString());
         userService.register(userRequest);
-        return "HELLO";
+        return "hi";
     }
 
 //    @PostMapping("/login")
