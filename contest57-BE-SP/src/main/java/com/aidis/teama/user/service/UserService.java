@@ -1,7 +1,10 @@
 package com.aidis.teama.user.service;
 
+import com.aidis.teama.user.db.GoogleUserEntity;
+import com.aidis.teama.user.db.GoogleUserRepository;
 import com.aidis.teama.user.db.UserEntity;
 import com.aidis.teama.user.db.UserRepository;
+import com.aidis.teama.user.model.GoogleRegisterRequest;
 import com.aidis.teama.user.model.LoginRequest;
 import com.aidis.teama.user.model.UserDTO;
 import com.aidis.teama.user.model.UserRequest;
@@ -25,6 +28,12 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
+    private final GoogleUserRepository googleUserRepository;
+
+
+
+
+
     public UserDTO register(UserRequest userRequest) {
         var entity = UserEntity.builder()
                 .userName(userRequest.getUserName())
@@ -36,6 +45,26 @@ public class UserService {
         userRepository.save(entity);
         return userConverter.userToDTO(entity);
     }
+
+
+    public String GoogleLoginService(
+            GoogleRegisterRequest googleLoginRequest
+    ){
+//        googleLoginRequest.getEmail()
+        var entity = GoogleUserEntity.builder()
+                .userName(googleLoginRequest.getUserName())
+                .email(googleLoginRequest.getEmail())
+                .userId(googleLoginRequest.getUserId())
+                .createdAt(LocalDateTime.now())
+                .build();
+        googleUserRepository.save(entity);
+        return "성공";
+    }
+
+
+
+
+
 
     public TokenResponse login(LoginRequest loginRequest) {
         log.info(loginRequest.toString());

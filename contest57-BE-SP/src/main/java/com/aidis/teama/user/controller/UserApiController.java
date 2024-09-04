@@ -1,15 +1,13 @@
 package com.aidis.teama.user.controller;
 
-import com.aidis.teama.user.model.LoginRequest;
+import com.aidis.teama.user.model.GoogleRegisterRequest;
+import com.aidis.teama.user.model.UserDTO;
 import com.aidis.teama.user.model.UserRequest;
 import com.aidis.teama.user.service.UserService;
-import com.aidis.teama.util.Jwt.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,14 +24,13 @@ public class UserApiController {
     private UserService userService;
 
     @PostMapping(value = "/register")
-    public String register(
+    public UserDTO register(
             @Validated
             @RequestBody
             UserRequest userRequest
     ) {
         log.info(userRequest.toString());
-        userService.register(userRequest);
-        return "is it fixed?";
+        return userService.register(userRequest);
     }
 
 //    @PostMapping("/login")
@@ -49,4 +46,17 @@ public class UserApiController {
 //            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 //        }
 //    }
+
+    @PostMapping(value = "/login")
+    public String loginGoogle(
+            @Validated
+            @RequestBody
+            GoogleRegisterRequest googleRegisterRequest
+    ){
+        log.info(googleRegisterRequest.toString());
+        userService.GoogleLoginService(googleRegisterRequest);
+        return "is it fixed?";
+    }
+
+
 }
