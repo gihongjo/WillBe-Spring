@@ -36,7 +36,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         String token = resolveToken(request);
         if (token != null && jwtTokenProvider.validateToken(token)) {
 
-
             String email = jwtTokenProvider.getEmail(token); // 이메일을 가져옴
 
             log.info("email is : "+email);

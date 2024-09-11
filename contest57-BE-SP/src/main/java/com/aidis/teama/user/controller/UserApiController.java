@@ -47,7 +47,7 @@ public class UserApiController {
 //        }
 //    }
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/login/google")
     public String loginGoogle(
             @Validated
             @RequestBody
@@ -55,8 +55,6 @@ public class UserApiController {
     ){
         log.info(googleRegisterRequest.toString());
         userService.GoogleLoginService(googleRegisterRequest);
-        return "is it fixed?";
+            return "is it fixed?";
     }
-
-
 }

@@ -18,10 +18,11 @@ public class GoogleRegisterRequest {
 
     @NotNull
     private String userName;
+
     @NotNull
     @Email(message = "이메일 형식이 아닙니다.")
     private String email;
+
     @NotNull
     private String userId;
-
 }
