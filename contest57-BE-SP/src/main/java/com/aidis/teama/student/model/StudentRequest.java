@@ -12,11 +12,8 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "StudentBehaviorTable")
 @ToString
 public class StudentRequest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String token;
     private String childName;
     private String behaviorType;

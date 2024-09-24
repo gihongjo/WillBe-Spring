@@ -12,7 +12,6 @@ public class StudentConverter {
 
 
         return StudentDTO.builder()
-                .token(studentEntity.getToken())
                 .child_name(studentEntity.getChild_name())
                 .behavior_type(studentEntity.getBehavior_type())
                 .behavior_name(studentEntity.getBehavior_name())

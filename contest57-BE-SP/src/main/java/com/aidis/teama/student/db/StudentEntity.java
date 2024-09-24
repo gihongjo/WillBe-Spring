@@ -16,7 +16,8 @@ public class StudentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String token;
+    private Long id;
+//  private String token;
     private String child_name;
     private String behavior_type;
     private String behavior_name;
