@@ -4,6 +4,7 @@ import com.aidis.teama.user.model.GoogleRegisterRequest;
 import com.aidis.teama.user.model.UserDTO;
 import com.aidis.teama.user.model.UserRequest;
 import com.aidis.teama.user.service.UserService;
+import com.aidis.teama.util.Jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +23,10 @@ public class UserApiController {
 
     @Autowired
     private UserService userService;
+
+    private JwtTokenProvider jwtTokenProvider;
+
+
 
     @PostMapping(value = "/register")
     public UserDTO register(
@@ -55,6 +60,8 @@ public class UserApiController {
     ){
         log.info(googleRegisterRequest.toString());
         userService.GoogleLoginService(googleRegisterRequest);
-            return "is it fixed?";
+        return jwtTokenProvider.createToken(googleRegisterRequest.getEmail());
+
+
     }
 }
