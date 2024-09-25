@@ -57,8 +57,11 @@ public class UserService {
                 .userId(googleLoginRequest.getUserId())
                 .createdAt(LocalDateTime.now())
                 .build();
+
+
         googleUserRepository.save(entity);
-        return "성공";
+        return jwtTokenProvider.createToken(entity.getEmail());
+
     }
 
 
