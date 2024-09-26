@@ -72,7 +72,7 @@ public class UserApiController {
 
 
 
-            return "Login confirmed for user: " +googleUser.getId().toString();
+            return "Login confirmed for user: " +googleUser.toString();
         } else {
             return "Login failed";
         }
