@@ -19,9 +19,6 @@ public class SecurityConfig {
 
     private final JwtTokenFilter jwtTokenFilter;
 
-    @Autowired
-    @Lazy
-    private UserDetailsService userDetailsService;
 
     public SecurityConfig(@Lazy JwtTokenFilter jwtTokenFilter) {
         this.jwtTokenFilter = jwtTokenFilter;
@@ -38,7 +35,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용하지 않음
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/user/register", "/api/user/login/google").permitAll()
+                                .requestMatchers("/api/user/register", "/api/user/register/google","/api/user/login").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin.disable());

@@ -33,24 +33,20 @@ public class UserService {
 
 
 
-
-    public UserDTO register(UserRequest userRequest) {
-        var entity = UserEntity.builder()
-                .userName(userRequest.getUserName())
-                .email(userRequest.getEmail())
-                .password(passwordEncoder.encode(userRequest.getPassword()))
-                .createdAt(LocalDateTime.now())
-                .build();
-
-        userRepository.save(entity);
-        return userConverter.userToDTO(entity);
-    }
-
-
     public String GoogleLoginService(
             GoogleRegisterRequest googleLoginRequest
     ){
-//        googleLoginRequest.getEmail()
+
+        try {
+            Optional<GoogleUserEntity> googleUserEntity =googleUserRepository.findByEmail(googleLoginRequest.getEmail());
+            log.info("Registered User email:"+googleUserEntity.toString());
+            return googleUserEntity.toString();
+
+        }catch (Exception e){
+
+        log.error(e.toString());
+        log.error("findbyemial error");
+
         var entity = GoogleUserEntity.builder()
                 .userName(googleLoginRequest.getUserName())
                 .email(googleLoginRequest.getEmail())
@@ -59,6 +55,9 @@ public class UserService {
                 .build();
         googleUserRepository.save(entity);
         return "성공";
+        }
+
+
     }
 
 
