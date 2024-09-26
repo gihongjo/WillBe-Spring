@@ -69,7 +69,7 @@ public class UserApiController {
             // GoogleUserEntity에 접근
             GoogleUserEntity googleUser = userDetails.getUser();
 
-x
+
 
 
             return "Login confirmed for user: " +googleUser.getId().toString();
