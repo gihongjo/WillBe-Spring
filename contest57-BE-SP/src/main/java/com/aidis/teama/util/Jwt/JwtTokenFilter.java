@@ -38,7 +38,6 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
             String email = jwtTokenProvider.getEmail(token); // 이메일을 가져옴
 
-            log.info("email is : "+email);
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);
             UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
@@ -51,7 +50,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
+            return bearerToken.substring(7); // "Bearer " 이후의 토큰만 추출
         }
         return null;
     }
