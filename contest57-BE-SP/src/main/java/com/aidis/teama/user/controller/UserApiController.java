@@ -41,12 +41,9 @@ public class UserApiController {
 
 
 
-        log.info(googleRegisterRequest.toString());
-        userService.GoogleLoginService(googleRegisterRequest);
+        String jwt= userService.GoogleLoginService(googleRegisterRequest);
 
-        String jwt=jwtTokenProvider.createToken(googleRegisterRequest.getEmail());
 
-        log.info(jwt);
         return jwt;
 
 

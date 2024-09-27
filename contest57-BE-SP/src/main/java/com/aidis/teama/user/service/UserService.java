@@ -13,6 +13,7 @@ import com.aidis.teama.util.Jwt.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,15 +38,18 @@ public class UserService {
             GoogleRegisterRequest googleLoginRequest
     ){
 
+        String jwt;
         try {
             Optional<GoogleUserEntity> googleUserEntity =googleUserRepository.findByEmail(googleLoginRequest.getEmail());
-            log.info("Registered User email:"+googleUserEntity.toString());
-            return googleUserEntity.toString();
+            jwt=jwtTokenProvider.createToken(googleLoginRequest.getEmail());
+
+
+            return jwt;
 
         }catch (Exception e){
 
         log.error(e.toString());
-        log.error("findbyemial error");
+        log.error("기입된 Email과 맞는 정보가 없습니다.");
 
         var entity = GoogleUserEntity.builder()
                 .userName(googleLoginRequest.getUserName())
@@ -54,14 +58,16 @@ public class UserService {
                 .createdAt(LocalDateTime.now())
                 .build();
         googleUserRepository.save(entity);
-        return "성공";
+
+
+        jwt=jwtTokenProvider.createToken(entity.getEmail());
+
+        return jwt;
         }
 
 
+
     }
-
-
-
 
 
 
