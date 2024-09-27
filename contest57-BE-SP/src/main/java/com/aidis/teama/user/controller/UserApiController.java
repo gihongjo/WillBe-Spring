@@ -62,6 +62,9 @@ public class UserApiController {
             GoogleUserEntity googleUser = userDetails.getUser();
 
 
+
+            //추후
+
             return "Login confirmed for user: " +googleUser.toString();
         } else {
             return "Login failed";
