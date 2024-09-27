@@ -2,8 +2,6 @@ package com.aidis.teama.user.service;
 
 import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.db.GoogleUserRepository;
-import com.aidis.teama.user.db.UserEntity;
-import com.aidis.teama.user.db.UserRepository;
 import com.aidis.teama.user.model.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
 
     private final GoogleUserRepository googleUserRepository;
     @Override

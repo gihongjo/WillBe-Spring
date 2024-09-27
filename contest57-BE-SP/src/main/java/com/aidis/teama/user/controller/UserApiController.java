@@ -28,10 +28,6 @@ public class UserApiController {
     private UserService userService;
 
 
-    final private JwtTokenProvider jwtTokenProvider;
-
-
-
     @PostMapping(value = "/login")
     public String login(
             @Validated
