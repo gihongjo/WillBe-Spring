@@ -34,7 +34,6 @@ public class StudentService {
     // Other business methods using studentRepository
     public StudentDTO register(StudentRequest studentRequest) {
         var entity = StudentEntity.builder()
-                .token(studentRequest.getToken())
                 .child_name(studentRequest.getChildName())
                 .behavior_type(studentRequest.getBehaviorName())
                 .behavior_name(studentRequest.getBehaviorName())
