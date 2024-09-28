@@ -1,14 +1,10 @@
 package com.aidis.teama.student.model;
 
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -16,13 +12,15 @@ import java.util.Date;
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class StudentDTO {
-    private Long id;
-    private Timestamp created_at;
+public class StudentAddRequest {
+    private String childName;
     private String student_name;
     private LocalDate birthday;
     private String expressionLevel;
     private String status;
+    private String recordType;
 }

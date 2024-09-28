@@ -12,10 +12,12 @@ public class StudentConverter {
 
 
         return StudentDTO.builder()
-                .child_name(studentEntity.getChild_name())
-                .behavior_type(studentEntity.getBehavior_type())
-                .behavior_name(studentEntity.getBehavior_name())
-                .record_type(studentEntity.getRecord_type())
+                .id(studentEntity.getId())
+                .created_at(studentEntity.getCreatedAt())
+                .student_name(studentEntity.getStudent_name())
+                .birthday(studentEntity.getBirthday())
+                .expressionLevel(studentEntity.getExpressionLevel())
+                .status(studentEntity.getStatus())
                 .build();
     }
 }

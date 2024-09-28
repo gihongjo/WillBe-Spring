@@ -1,11 +1,13 @@
 package com.aidis.teama.user.service;
 
+import com.aidis.teama.student.db.StudentEntity;
+import com.aidis.teama.student.db.StudentRepository;
+import com.aidis.teama.student.model.StudentDTO;
+import com.aidis.teama.student.service.StudentConverter;
 import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.db.GoogleUserRepository;
 import com.aidis.teama.user.model.GoogleRegisterRequest;
-import com.aidis.teama.user.model.LoginRequest;
 import com.aidis.teama.util.Jwt.JwtTokenProvider;
-import com.aidis.teama.util.Jwt.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -13,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,64 +27,58 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
 
     private final GoogleUserRepository googleUserRepository;
-
+    private final StudentRepository studentRepository;
 
 
 
     public String GoogleLoginService(
             GoogleRegisterRequest googleLoginRequest
-    ){
+    ) {
 
         String jwt;
+
         try {
-            Optional<GoogleUserEntity> googleUserEntity =googleUserRepository.findByEmail(googleLoginRequest.getEmail());
-            jwt=jwtTokenProvider.createToken(googleLoginRequest.getEmail());
+            Optional<GoogleUserEntity> googleUserEntity = googleUserRepository.findByEmail(googleLoginRequest.getEmail());
+
+            if (googleUserEntity.isPresent()) {
+                jwt = jwtTokenProvider.createToken(googleLoginRequest.getEmail());
+
+                return jwt;
+
+            } else {
+
+                var entity = GoogleUserEntity.builder()
+                        .userName(googleLoginRequest.getUserName())
+                        .email(googleLoginRequest.getEmail())
+                        .userId(googleLoginRequest.getUserId())
+                        .createdAt(LocalDateTime.now())
+                        .build();
+                googleUserRepository.save(entity);
 
 
-            return jwt;
+                jwt = jwtTokenProvider.createToken(entity.getEmail());
 
-        }catch (Exception e){
+                return jwt;
 
-        log.error(e.toString());
-        log.error("기입된 Email과 맞는 정보가 없습니다.");
-
-        var entity = GoogleUserEntity.builder()
-                .userName(googleLoginRequest.getUserName())
-                .email(googleLoginRequest.getEmail())
-                .userId(googleLoginRequest.getUserId())
-                .createdAt(LocalDateTime.now())
-                .build();
-        googleUserRepository.save(entity);
-
-
-        jwt=jwtTokenProvider.createToken(entity.getEmail());
-
-        return jwt;
+            }
+        } catch (Exception e) {
+            log.info(e.toString());
         }
-
-
-
+        return "Error";
     }
 
 
+    public List<StudentDTO> ViewStudents(
+            GoogleUserEntity googleUserEntity
+    ){
+        List<StudentEntity> studentEntityList = studentRepository.findByGoogleUserOrderByCreatedAtDesc(googleUserEntity);
+        List<StudentDTO> studentDTOS = new ArrayList<>(); // 리스트 초기화
 
-//    public TokenResponse login(LoginRequest loginRequest) {
-//        log.info(loginRequest.toString());
-//
-//        Optional<UserEntity> userOpt = userRepository.findByEmail(loginRequest.getEmail());
-//        if (userOpt.isPresent()) {
-//            UserEntity user = userOpt.get();
-//            log.info("입력받은 비밀번호: " + loginRequest.getPassword());
-//            log.info("데이터베이스에 있는 비밀번호: " + user.getPassword());
-//
-//            if (passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
-//                String jwtToken = jwtTokenProvider.createToken(user.getEmail());
-//                return new TokenResponse(jwtToken);
-//            } else {
-//                throw new IllegalArgumentException("Invalid password");
-//            }
-//        } else {
-//            throw new IllegalArgumentException("Invalid email");
-//        }
-//    }
+        for(int i=0;i< studentEntityList.size();i++){
+            studentDTOS.add(i, StudentConverter.StudentToDTO(studentEntityList.get(i)));
+        }
+
+        return studentDTOS;
+    }
+
 }

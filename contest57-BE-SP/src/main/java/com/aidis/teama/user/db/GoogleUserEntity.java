@@ -1,13 +1,12 @@
 package com.aidis.teama.user.db;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.aidis.teama.student.db.StudentEntity;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,8 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity(name = "googleUserTable")
-@ToString
-
+@ToString(exclude = "students") // StudentEntity 목록 참조 제외
 public class GoogleUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +23,9 @@ public class GoogleUserEntity {
     private String email;
     private String userName;
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "googleUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentEntity> students;
+
 
 }
