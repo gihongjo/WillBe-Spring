@@ -20,6 +20,7 @@ public class BehaviorEntity {
     private String behaviorType;
     private String behaviorName;
     private String recordType;
+    private String status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "student_id") // 외래 키

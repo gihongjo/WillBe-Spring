@@ -3,7 +3,6 @@ package com.aidis.teama.student.service;
 import com.aidis.teama.student.db.StudentEntity;
 import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.student.model.StudentAddRequest;
-import com.aidis.teama.student.model.StudentDTO;
 import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ public class StudentService {
     }
 
     // Other business methods using studentRepository
-    public ResponseEntity<StudentDTO> add(StudentAddRequest studentAddRequest) {
+    public ResponseEntity<String> add(StudentAddRequest studentAddRequest) {
 
 
         GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
@@ -53,11 +52,10 @@ public class StudentService {
                     .build();
 
             studentRepository.save(entity);
-            return ResponseEntity.ok(StudentConverter.StudentToDTO(entity));
+            return ResponseEntity.ok("Student added successfully");
 
 
         }else {
-
             throw new IllegalStateException("JWT Error");
         }
     }
