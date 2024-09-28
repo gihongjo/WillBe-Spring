@@ -24,7 +24,7 @@ public class GoogleUserEntity {
     private String userName;
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "googleUser", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "googleUser", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StudentEntity> students;
 
 

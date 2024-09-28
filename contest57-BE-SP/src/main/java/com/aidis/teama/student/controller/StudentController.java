@@ -4,7 +4,7 @@ import com.aidis.teama.student.model.StudentDTO;
 import com.aidis.teama.student.model.StudentAddRequest;
 import com.aidis.teama.student.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,11 +13,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/student")
 public class StudentController {
 
-    @Autowired
-    private StudentService studentService;
+
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
     // 2. 요청을 받는 POST 메서드 생성
     @PostMapping("/add")
-    public StudentDTO add(
+    public ResponseEntity<StudentDTO> add(
             @Validated
             @RequestBody
             StudentAddRequest studentAddRequest

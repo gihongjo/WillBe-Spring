@@ -2,20 +2,17 @@ package com.aidis.teama.student.service;
 
 import com.aidis.teama.student.db.StudentEntity;
 import com.aidis.teama.student.db.StudentRepository;
-import com.aidis.teama.student.model.StudentDTO;
 import com.aidis.teama.student.model.StudentAddRequest;
+import com.aidis.teama.student.model.StudentDTO;
 import com.aidis.teama.user.db.GoogleUserEntity;
-import com.aidis.teama.user.model.CustomUserDetails;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-
-import static org.hibernate.query.sqm.tree.SqmNode.log;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -32,24 +29,36 @@ public class StudentService {
     }
 
     // Other business methods using studentRepository
-    public StudentDTO add(StudentAddRequest studentAddRequest) {
-        GoogleUserEntity googleUser = customUserDetailsService.getCurrentUser();
+    public ResponseEntity<StudentDTO> add(StudentAddRequest studentAddRequest) {
 
 
-        if (googleUser != null) {
+        GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
+        if (googleUserEntity != null) {
 
+        Optional<StudentEntity> foundStudent = googleUserEntity.getStudents().stream()
+                .filter(student -> student.getStudent_name().equals(studentAddRequest.getStudent_name()))
+                .findFirst();
+
+        if(foundStudent.isPresent()){
+
+            throw new IllegalStateException("사용자는 이미 똑같은 이름을 가진 학생을 가지고 있습니다. 다른 이름으로 생성해주세요.");
+        }
             var entity = StudentEntity.builder()
                     .student_name(studentAddRequest.getStudent_name())
                     .birthday(studentAddRequest.getBirthday())
                     .expressionLevel(studentAddRequest.getExpressionLevel())
                     .status(studentAddRequest.getStatus())
                     .createdAt(Timestamp.valueOf(LocalDateTime.now()))
-                    .googleUser(googleUser)
+                    .googleUser(googleUserEntity)
                     .build();
 
             studentRepository.save(entity);
-            return StudentConverter.StudentToDTO(entity);
+            return ResponseEntity.ok(StudentConverter.StudentToDTO(entity));
+
+
+        }else {
+
+            throw new IllegalStateException("JWT Error");
         }
-        return null;
     }
 }
