@@ -56,9 +56,11 @@ public class UserService {
                 googleUserRepository.save(entity);
 
 
+
+
                 jwt = jwtTokenProvider.createToken(entity.getEmail());
 
-                return jwt;
+                return "registered_"+jwt;
 
             }
         } catch (Exception e) {

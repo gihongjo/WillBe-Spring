@@ -2,12 +2,14 @@ package com.aidis.teama.behavior.controller;
 
 import com.aidis.teama.behavior.model.BehaviorAddRequest;
 import com.aidis.teama.behavior.model.BehaviorDTO;
+import com.aidis.teama.behavior.model.RecordingBehaviorDTO;
 import com.aidis.teama.behavior.service.BehaviorService;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -33,11 +35,16 @@ public class BehaviorController {
             BehaviorAddRequest behaviorAddRequest
     ){
 
-        return behaviorService.BehaviorAdd(customUserDetailsService.getCurrentUser(), behaviorAddRequest);
+        return behaviorService.BehaviorAdd(behaviorAddRequest);
 
     }
 
-//    @GetMapping(value = "/recording")
-//    public List<BehaviorDTO>
+    @GetMapping(value = "/recording_cards")
+    public List<RecordingBehaviorDTO> GetRecording(){
+
+
+        return behaviorService.getRecordingBehaviorList();
+
+    }
 
 }

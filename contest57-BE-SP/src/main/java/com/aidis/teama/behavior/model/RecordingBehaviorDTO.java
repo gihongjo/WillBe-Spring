@@ -1,23 +1,27 @@
 package com.aidis.teama.behavior.model;
 
+
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class BehaviorAddRequest {
+public class RecordingBehaviorDTO {
 
     private Long studentId;
+    private String studentName;
+
+    private Long behaviorId;
     private String behaviorType;
     private String behaviorName;
     private String recordType;
     private String status;
-
 
 }

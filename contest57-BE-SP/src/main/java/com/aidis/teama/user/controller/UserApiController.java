@@ -52,7 +52,7 @@ public class UserApiController {
 
             GoogleUserEntity googleUser = userDetails.getUser();
 
-            return googleUser.getUserId();
+            return googleUser.getUserName();
 
         }else{
             return "jwt is expired or error";

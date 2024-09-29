@@ -3,13 +3,16 @@ package com.aidis.teama.behavior.service;
 import com.aidis.teama.behavior.db.BehaviorEntity;
 import com.aidis.teama.behavior.db.BehaviorRepository;
 import com.aidis.teama.behavior.model.BehaviorAddRequest;
+import com.aidis.teama.behavior.model.RecordingBehaviorDTO;
 import com.aidis.teama.student.db.StudentEntity;
 import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.db.GoogleUserRepository;
+import com.aidis.teama.user.service.CustomUserDetailsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,17 +27,26 @@ public class BehaviorService {
 
     private final GoogleUserRepository googleUserRepository;
 
+    private final CustomUserDetailsService customUserDetailsService;
 
-    public BehaviorService(BehaviorRepository behaviorRepository, StudentRepository studentRepository, GoogleUserRepository googleUserRepository) {
+    private final RecordingBehaviorConverter recordingBehaviorConverter;
+
+    public BehaviorService(BehaviorRepository behaviorRepository, StudentRepository studentRepository, GoogleUserRepository googleUserRepository, CustomUserDetailsService customUserDetailsService, RecordingBehaviorConverter recordingBehaviorConverter) {
         this.behaviorRepository = behaviorRepository;
+
         this.studentRepository = studentRepository;
         this.googleUserRepository = googleUserRepository;
+        this.customUserDetailsService = customUserDetailsService;
+        this.recordingBehaviorConverter = recordingBehaviorConverter;
     }
 
 
     //행동 생성 시
-    public ResponseEntity<String> BehaviorAdd(GoogleUserEntity googleUserEntity, BehaviorAddRequest behaviorAddRequest) {
+    public ResponseEntity<String> BehaviorAdd(BehaviorAddRequest behaviorAddRequest) {
         try {
+
+            var googleUserEntity= customUserDetailsService.getCurrentUser();
+
             Optional<StudentEntity> optionalStudentEntity = studentRepository.findById(behaviorAddRequest.getStudentId());
 
             if (optionalStudentEntity.isPresent()) {
@@ -62,6 +74,7 @@ public class BehaviorService {
                             .behaviorType(behaviorAddRequest.getBehaviorType())
                             .recordType(behaviorAddRequest.getRecordType())
                             .studentEntity(studentEntity)
+                            .status(behaviorAddRequest.getStatus())
                             .build();
 
                     behaviorRepository.save(behaviorEntity);
@@ -75,5 +88,33 @@ public class BehaviorService {
         } catch (Exception e) {
             throw new RuntimeException("Failed to add behavior: " + e.getMessage(), e);
         }
+    }
+
+    public List<RecordingBehaviorDTO> getRecordingBehaviorList(){
+
+        List<RecordingBehaviorDTO> recordingBehaviorDTOList = new ArrayList<>();
+
+        List<StudentEntity> studentEntityList=
+                studentRepository.findByGoogleUserOrderByCreatedAtDesc(customUserDetailsService.getCurrentUser());
+
+
+
+        for(StudentEntity studentEntity :studentEntityList){
+
+            List<BehaviorEntity> behaviorEntityList =
+                    behaviorRepository.findAllByStudentEntityAndAndStatus(studentEntity,"recording");
+
+            for(BehaviorEntity behaviorEntity: behaviorEntityList){
+
+                recordingBehaviorDTOList.add(recordingBehaviorConverter.BehaviorToRecordingBehaviorDTO(behaviorEntity));
+
+
+            }
+
+        }
+
+
+        return recordingBehaviorDTOList;
+
     }
 }
