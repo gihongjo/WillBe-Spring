@@ -43,7 +43,7 @@ public class UserService {
             if (googleUserEntity.isPresent()) {
                 jwt = jwtTokenProvider.createToken(googleLoginRequest.getEmail());
 
-                return jwt;
+                return "registered_"+jwt;
 
             } else {
 
@@ -60,7 +60,7 @@ public class UserService {
 
                 jwt = jwtTokenProvider.createToken(entity.getEmail());
 
-                return "registered_"+jwt;
+                return jwt;
 
             }
         } catch (Exception e) {
