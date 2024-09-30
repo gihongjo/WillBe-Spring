@@ -1,5 +1,6 @@
 package com.aidis.teama.student.db;
 
+import com.aidis.teama.behavior.db.BehaviorEntity;
 import com.aidis.teama.user.db.GoogleUserEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,6 +9,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -31,5 +33,7 @@ public class StudentEntity {
     private GoogleUserEntity googleUser;
 
 
+    @OneToMany(mappedBy = "studentEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<BehaviorEntity> behaviors;
 
 }

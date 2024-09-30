@@ -9,4 +9,7 @@ public interface StudentRepository extends JpaRepository<StudentEntity,Long> {
 
     public List<StudentEntity> findByGoogleUserOrderByCreatedAtDesc(GoogleUserEntity googleUserEntity);
 
+    public List<StudentEntity> findAllByGoogleUser(GoogleUserEntity googleUserEntity);
+
+
 }

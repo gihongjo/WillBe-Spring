@@ -12,4 +12,5 @@ public interface BehaviorRepository extends JpaRepository<BehaviorEntity,Long> {
 
 
 
+
 }

@@ -5,6 +5,7 @@ import com.aidis.teama.behavior.db.BehaviorRepository;
 import com.aidis.teama.record.db.RecordEntity;
 import com.aidis.teama.record.db.RecordRepository;
 import com.aidis.teama.record.model.RecordLogsDTO;
+import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import org.springframework.stereotype.Component;
@@ -27,11 +28,15 @@ public class RecordService {
     private final CustomUserDetailsService customUserDetailsService;
     private final RecordToLogDTOConverter recordToLogDTOConverter;
 
-    public RecordService(RecordRepository recordRepository, BehaviorRepository behaviorRepository, CustomUserDetailsService customUserDetailsService, RecordToLogDTOConverter recordToLogDTOConverter) {
+    private final StudentRepository studentRepository;
+
+
+    public RecordService(RecordRepository recordRepository, BehaviorRepository behaviorRepository, CustomUserDetailsService customUserDetailsService, RecordToLogDTOConverter recordToLogDTOConverter, StudentRepository studentRepository) {
         this.recordRepository = recordRepository;
         this.behaviorRepository = behaviorRepository;
         this.customUserDetailsService = customUserDetailsService;
         this.recordToLogDTOConverter = recordToLogDTOConverter;
+        this.studentRepository = studentRepository;
     }
 
 
@@ -69,6 +74,23 @@ public class RecordService {
 
     }
 
+
+    public List<RecordLogsDTO> getDailyBehaviorLogs(){
+
+        GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
+
+        List<RecordLogsDTO> recordLogsDTOList = new ArrayList<>();
+
+//        studentRepository.findAllByGoogleUser(googleUserEntity).stream().filter( studentEntity ->  )
+
+
+
+//        behaviorRepository.findAllByStudentEntityAndAndStatus()
+
+
+
+        return recordLogsDTOList;
+    }
 
 
 }

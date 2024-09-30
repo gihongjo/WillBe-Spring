@@ -2,11 +2,20 @@ package com.aidis.teama.record.db;
 
 import com.aidis.teama.behavior.db.BehaviorEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+
 
 import java.util.List;
 
 public interface RecordRepository extends JpaRepository<RecordEntity,Long> {
 
-    public List<RecordEntity> findAllByBehaviorEntity(BehaviorEntity behaviorEntity);
+
+    @Query("SELECT r FROM RecordEntity r JOIN r.behaviorEntity b JOIN b.studentEntity s JOIN s.googleUser g " +
+            "WHERE g.id = :googleUserId AND r.status = 'registered' AND DATE(r.time) = CURRENT_DATE")
+    List<RecordEntity> findTodayRegisteredRecordsByGoogleUserId(@Param("googleUserId") Long googleUserId);
+
+
 
 }

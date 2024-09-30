@@ -34,8 +34,12 @@ public class RecordController {
 
         return recordService.RecordAndGetLogs(behavior_id);
 
+    }
 
+    @GetMapping("/daily_logs")
+    public List<RecordLogsDTO> getDailyBehaviorLogs(){
 
+        return recordService.getDailyBehaviorLogs();
 
     }
 
