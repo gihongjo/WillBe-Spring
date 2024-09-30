@@ -40,13 +40,9 @@ public class BehaviorController {
     @GetMapping(value = "/recording_cards")
     public List<StudentWithBehaviorDTO> GetRecording(){
 
-
         return behaviorService.getRecordingBehaviorList();
 
     }
-
-
-
 
 
 

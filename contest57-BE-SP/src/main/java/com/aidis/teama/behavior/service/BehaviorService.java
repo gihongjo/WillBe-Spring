@@ -100,7 +100,8 @@ public class BehaviorService {
 
             for(BehaviorEntity behaviorEntity: behaviorEntityList){
 
-                studentWithBehaviorDTOList.add(recordingBehaviorConverter.BehaviorToRecordingBehaviorDTO(behaviorEntity));
+                studentWithBehaviorDTOList
+                        .add(recordingBehaviorConverter.BehaviorToRecordingBehaviorDTO(behaviorEntity));
 
             }
         }

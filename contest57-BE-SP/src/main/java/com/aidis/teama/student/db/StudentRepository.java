@@ -8,4 +8,5 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<StudentEntity,Long> {
 
     public List<StudentEntity> findByGoogleUserOrderByCreatedAtDesc(GoogleUserEntity googleUserEntity);
+
 }

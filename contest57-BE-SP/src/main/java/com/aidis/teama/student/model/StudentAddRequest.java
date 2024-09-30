@@ -17,10 +17,8 @@ import java.util.Date;
 @ToString
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class StudentAddRequest {
-    private String childName;
     private String student_name;
     private LocalDate birthday;
     private String expressionLevel;
     private String status;
-    private String recordType;
 }

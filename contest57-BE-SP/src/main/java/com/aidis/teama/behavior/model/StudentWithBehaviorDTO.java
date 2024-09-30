@@ -17,7 +17,6 @@ public class StudentWithBehaviorDTO {
 
     private Long studentId;
     private String studentName;
-
     private Long behaviorId;
     private String behaviorType;
     private String behaviorName;
