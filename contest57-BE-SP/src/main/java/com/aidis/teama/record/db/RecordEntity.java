@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -12,12 +13,13 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 @Entity(name = "recordTable")
-@ToString
+@ToString(exclude = "behaviorTable")
 public class RecordEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Timestamp time;
+    private LocalDateTime time;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "behavior_id") // 외래 키

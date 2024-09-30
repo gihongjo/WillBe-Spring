@@ -13,7 +13,7 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class RecordingBehaviorDTO {
+public class StudentWithBehaviorDTO {
 
     private Long studentId;
     private String studentName;

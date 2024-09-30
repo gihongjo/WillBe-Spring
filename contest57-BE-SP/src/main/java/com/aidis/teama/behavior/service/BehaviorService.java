@@ -3,10 +3,9 @@ package com.aidis.teama.behavior.service;
 import com.aidis.teama.behavior.db.BehaviorEntity;
 import com.aidis.teama.behavior.db.BehaviorRepository;
 import com.aidis.teama.behavior.model.BehaviorAddRequest;
-import com.aidis.teama.behavior.model.RecordingBehaviorDTO;
+import com.aidis.teama.behavior.model.StudentWithBehaviorDTO;
 import com.aidis.teama.student.db.StudentEntity;
 import com.aidis.teama.student.db.StudentRepository;
-import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.db.GoogleUserRepository;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static org.hibernate.query.sqm.tree.SqmNode.log;
 
 @Service
 public class BehaviorService {
@@ -44,7 +41,6 @@ public class BehaviorService {
     //행동 생성 시
     public ResponseEntity<String> BehaviorAdd(BehaviorAddRequest behaviorAddRequest) {
         try {
-
             var googleUserEntity= customUserDetailsService.getCurrentUser();
 
             Optional<StudentEntity> optionalStudentEntity = studentRepository.findById(behaviorAddRequest.getStudentId());
@@ -90,14 +86,12 @@ public class BehaviorService {
         }
     }
 
-    public List<RecordingBehaviorDTO> getRecordingBehaviorList(){
+    public List<StudentWithBehaviorDTO> getRecordingBehaviorList(){
 
-        List<RecordingBehaviorDTO> recordingBehaviorDTOList = new ArrayList<>();
+        List<StudentWithBehaviorDTO> studentWithBehaviorDTOList = new ArrayList<>();
 
         List<StudentEntity> studentEntityList=
                 studentRepository.findByGoogleUserOrderByCreatedAtDesc(customUserDetailsService.getCurrentUser());
-
-
 
         for(StudentEntity studentEntity :studentEntityList){
 
@@ -106,15 +100,13 @@ public class BehaviorService {
 
             for(BehaviorEntity behaviorEntity: behaviorEntityList){
 
-                recordingBehaviorDTOList.add(recordingBehaviorConverter.BehaviorToRecordingBehaviorDTO(behaviorEntity));
-
+                studentWithBehaviorDTOList.add(recordingBehaviorConverter.BehaviorToRecordingBehaviorDTO(behaviorEntity));
 
             }
-
         }
 
-
-        return recordingBehaviorDTOList;
+        return studentWithBehaviorDTOList;
 
     }
+
 }

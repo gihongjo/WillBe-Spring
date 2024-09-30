@@ -43,6 +43,7 @@ public class UserService {
             if (googleUserEntity.isPresent()) {
                 jwt = jwtTokenProvider.createToken(googleLoginRequest.getEmail());
 
+                //이미 가입된 정보이기때문에 registered_를 붙여준다. 플러터쪽에서 필요한 것.
                 return "registered_"+jwt;
 
             } else {

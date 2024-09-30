@@ -2,7 +2,7 @@ package com.aidis.teama.behavior.service;
 
 
 import com.aidis.teama.behavior.db.BehaviorEntity;
-import com.aidis.teama.behavior.model.RecordingBehaviorDTO;
+import com.aidis.teama.behavior.model.StudentWithBehaviorDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RecordingBehaviorConverter {
 
-    public RecordingBehaviorDTO BehaviorToRecordingBehaviorDTO(BehaviorEntity behaviorEntity){
+    public StudentWithBehaviorDTO BehaviorToRecordingBehaviorDTO(BehaviorEntity behaviorEntity){
 
-        var entity = RecordingBehaviorDTO.builder()
+        var entity = StudentWithBehaviorDTO.builder()
                 .studentId(behaviorEntity.getStudentEntity().getId())
                 .behaviorId(behaviorEntity.getId())
                 .studentName(behaviorEntity.getStudentEntity().getStudent_name())
