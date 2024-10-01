@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity(name = "googleUserTable")
-@ToString(exclude = "students") // StudentEntity 목록 참조 제외
+@ToString(exclude = "studentEntity") // StudentEntity 목록 참조 제외
 public class GoogleUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -18,6 +18,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static org.hibernate.query.sqm.tree.SqmNode.log;
 
 @Service
 @Component
@@ -59,8 +62,6 @@ public class RecordService {
 
                 recordRepository.save(recordEntity);
 
-
-
                 return recordToLogDTOConverter.recordEntityToDTO(recordEntity);
 
 
@@ -81,13 +82,14 @@ public class RecordService {
 
         List<RecordLogsDTO> recordLogsDTOList = new ArrayList<>();
 
-//        studentRepository.findAllByGoogleUser(googleUserEntity).stream().filter( studentEntity ->  )
 
+        List<RecordEntity>recordEntityList= recordRepository.findTodayRegisteredRecordsByGoogleUserId(googleUserEntity.getId());
 
-
-//        behaviorRepository.findAllByStudentEntityAndAndStatus()
-
-
+        recordLogsDTOList.addAll(
+                recordEntityList.stream()
+                        .map(recordToLogDTOConverter::recordEntityToDTO)
+                        .collect(Collectors.toList())
+        );
 
         return recordLogsDTOList;
     }

@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity(name = "behaviorTable")
-@ToString(exclude = "studentTable") // GoogleUserEntity 참조 제외
+@ToString(exclude = "studentEntity")
 public class BehaviorEntity {
 
 

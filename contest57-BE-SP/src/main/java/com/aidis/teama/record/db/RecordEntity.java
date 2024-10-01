@@ -1,6 +1,7 @@
 package com.aidis.teama.record.db;
 
 import com.aidis.teama.behavior.db.BehaviorEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Entity(name = "recordTable")
-@ToString(exclude = "behaviorTable")
+@ToString(exclude = "behaviorEntity")
 public class RecordEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

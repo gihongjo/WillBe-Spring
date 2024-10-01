@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity(name = "studentTable")
-@ToString(exclude = "googleUser") // GoogleUserEntity 참조 제외
+@ToString(exclude = "googleUserEntity") // GoogleUserEntity 참조 제외
 public class StudentEntity {
 
     @Id
@@ -28,7 +28,7 @@ public class StudentEntity {
     private String expressionLevel;
     private String status;
     private Timestamp createdAt;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "google_user_id") // 외래 키
     private GoogleUserEntity googleUser;
 

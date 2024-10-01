@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,5 +22,5 @@ public class RecordLogsDTO {
     private String behaviorName;
     private String StudentName;
     private Long recordId;
-    private Timestamp timestamp;
+    private LocalDateTime timestamp;
 }
