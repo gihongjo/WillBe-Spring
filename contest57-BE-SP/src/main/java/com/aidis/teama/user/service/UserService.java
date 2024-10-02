@@ -38,13 +38,23 @@ public class UserService {
         String jwt;
 
         try {
-            Optional<GoogleUserEntity> googleUserEntity = googleUserRepository.findByEmail(googleLoginRequest.getEmail());
+            Optional<GoogleUserEntity> optGoogleUserEntity = googleUserRepository.findByEmail(googleLoginRequest.getEmail());
 
-            if (googleUserEntity.isPresent()) {
+
+
+            if (optGoogleUserEntity.isPresent()) {
+                GoogleUserEntity googleUserEntity = optGoogleUserEntity.get();
+
+
                 jwt = jwtTokenProvider.createToken(googleLoginRequest.getEmail());
 
+                if(googleUserRepository.findByEmailAndCheckStudentExist(googleUserEntity))
+                    return "registered_"+jwt;
+
+                return jwt;
+
+
                 //이미 가입된 정보이기때문에 registered_를 붙여준다. 플러터쪽에서 필요한 것.
-                return "registered_"+jwt;
 
             } else {
 

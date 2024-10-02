@@ -1,19 +1,18 @@
 package com.aidis.teama.record.service;
 
 import com.aidis.teama.record.db.RecordEntity;
+import com.aidis.teama.record.model.GraphDailyDTO;
 import com.aidis.teama.record.model.RecordLogsDTO;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
-
-import static org.hibernate.query.sqm.tree.SqmNode.log;
+import java.util.List;
 
 
 @Service
 @RequiredArgsConstructor
-public class RecordToLogDTOConverter {
+public class RecordConverter {
 
 
 
@@ -26,6 +25,17 @@ public class RecordToLogDTOConverter {
                 .recordId(recordEntity.getId())
                 .StudentName(recordEntity.getBehaviorEntity().getStudentEntity().getStudent_name())
                 .timestamp(Timestamp.valueOf(recordEntity.getTime()).toLocalDateTime())
+                .build();
+
+    }
+
+
+    public GraphDailyDTO createGraphDailyDTO(String behaviorId, String behaviorName, List<Integer> graph){
+
+        return GraphDailyDTO.builder()
+                .behaviorId(behaviorId)
+                .behaviorName(behaviorName)
+                .graph(graph)
                 .build();
 
     }

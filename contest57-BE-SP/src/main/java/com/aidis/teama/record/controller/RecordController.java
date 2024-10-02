@@ -1,6 +1,7 @@
 package com.aidis.teama.record.controller;
 
 import com.aidis.teama.record.db.RecordRepository;
+import com.aidis.teama.record.model.GraphDailyDTO;
 import com.aidis.teama.record.model.RecordLogsDTO;
 import com.aidis.teama.record.service.RecordService;
 import com.aidis.teama.user.db.GoogleUserEntity;
@@ -8,6 +9,7 @@ import com.aidis.teama.user.service.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -36,12 +38,23 @@ public class RecordController {
 
     }
 
-    @GetMapping("/daily_logs")
+    @GetMapping(value = "/daily_logs")
     public List<RecordLogsDTO> getDailyBehaviorLogs(){
 
         return recordService.getDailyBehaviorLogs();
 
     }
 
+    @GetMapping(value = "/graph/daily/{behavior_id}")
+    public GraphDailyDTO getGraphDaily(
+
+            @PathVariable("behavior_id")
+            String behavior_id
+    ){
+
+        return recordService.getGraphDaily(behavior_id, LocalDate.now());
+
+
+    }
 
 }
