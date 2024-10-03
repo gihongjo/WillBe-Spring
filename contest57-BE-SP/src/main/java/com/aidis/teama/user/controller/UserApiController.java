@@ -42,22 +42,11 @@ public class UserApiController {
     }
 
     @GetMapping(value = "/autologin")
-    public String autologin(){
+    public String autologin(
+    ){
 
-        //헤더에서 토큰을 추출해 유저엔터티를 찾는 로직.
-        if (SecurityContextHolder.getContext().getAuthentication() != null) {
 
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-
-            GoogleUserEntity googleUser = userDetails.getUser();
-
-            return googleUser.getUserName();
-
-        }else{
-            return "jwt is expired or error";
-        }
-
+       return userService.autologin();
     }
 
     @GetMapping(value = "/view_students")
