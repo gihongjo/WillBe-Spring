@@ -1,5 +1,6 @@
 package com.aidis.teama.student.controller;
 
+import com.aidis.teama.student.model.FirstStudentAddRequest;
 import com.aidis.teama.student.model.StudentAddRequest;
 import com.aidis.teama.student.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +31,16 @@ public class StudentController {
         return studentService.add(studentAddRequest);
     }
 
+
+
+    @PostMapping("/add/firstStudent")
+    public String firstStudentAdd(
+            @Validated
+            @RequestBody
+            FirstStudentAddRequest firstStudentAddRequest
+    ) {
+        return studentService.firstStudentAdd(firstStudentAddRequest);
+    }
 
 
 }
