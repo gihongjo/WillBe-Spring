@@ -1,5 +1,6 @@
 package com.aidis.teama.user.service;
 
+import com.aidis.teama.behavior.db.BehaviorEntity;
 import com.aidis.teama.student.db.StudentEntity;
 import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.student.model.StudentDTO;
@@ -8,6 +9,7 @@ import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.db.GoogleUserRepository;
 import com.aidis.teama.user.model.CustomUserDetails;
 import com.aidis.teama.user.model.GoogleRegisterRequest;
+import com.aidis.teama.user.model.ViewStudentsDTO;
 import com.aidis.teama.util.Jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,7 @@ public class UserService {
 
     private final GoogleUserRepository googleUserRepository;
     private final StudentRepository studentRepository;
+    private final UserConverter userConverter;
 
 
     public String GoogleLoginService(
@@ -92,6 +95,24 @@ public class UserService {
 
         return studentDTOS;
     }
+
+
+    public List<ViewStudentsDTO> ViewStudentsBehaviors(
+            GoogleUserEntity googleUserEntity
+    ) {
+        List<StudentEntity> studentEntityList = studentRepository.findByGoogleUserOrderByCreatedAtDesc(googleUserEntity);
+
+        List<ViewStudentsDTO> viewStudentsDTOList = new ArrayList<>(); // 리스트 초기화
+
+
+        for (StudentEntity studentEntity : studentEntityList) {
+
+            viewStudentsDTOList.add(userConverter.viewStudentsConverter(studentEntity, studentEntity.getBehaviors()));
+
+        }
+        return viewStudentsDTOList;
+    }
+
 
     public String autologin() {
 
