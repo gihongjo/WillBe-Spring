@@ -57,4 +57,18 @@ public class RecordController {
 
     }
 
+
+    @GetMapping(value = "/{record_id}/delete")
+    public boolean deleteRecord(
+            @PathVariable(value = "record_id")
+            String record_id
+    ){
+
+        return recordService.deleteRecord(record_id);
+
+
+    }
+
+
+
 }

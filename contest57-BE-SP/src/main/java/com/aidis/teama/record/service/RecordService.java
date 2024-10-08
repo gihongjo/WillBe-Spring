@@ -117,4 +117,30 @@ public class RecordService {
 
     }
 
+
+
+    public boolean deleteRecord(String recordId){
+
+
+        Optional<RecordEntity> optRecordEntity=   recordRepository.findById(Long.valueOf(recordId));
+
+
+        if(optRecordEntity.isPresent()){
+                RecordEntity recordEntity = optRecordEntity.get();
+
+                if(recordEntity.getBehaviorEntity().getStudentEntity().getGoogleUser().getId().equals
+                        (customUserDetailsService.getCurrentUser().getId())){
+                    recordRepository.deleteById(Long.valueOf(recordId));
+                    return true;
+                }
+
+
+        }
+
+
+
+        return false;
+
+    }
+
 }

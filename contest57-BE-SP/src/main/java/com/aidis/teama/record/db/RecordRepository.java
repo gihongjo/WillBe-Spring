@@ -24,4 +24,8 @@ public interface RecordRepository extends JpaRepository<RecordEntity,Long> {
             @Param("startOfDay") LocalDateTime startOfDay,
             @Param("endOfDay") LocalDateTime endOfDay);
 
+
+
+    void deleteById(Long id);
+
 }
