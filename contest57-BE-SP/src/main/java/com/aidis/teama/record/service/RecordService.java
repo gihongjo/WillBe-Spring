@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,34 +48,31 @@ public class RecordService {
     public RecordLogsDTO RecordAndGetLogs(String behavior_id){
 
         GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
-        Optional<BehaviorEntity> optBehaviorEntity= behaviorRepository.findById(Long.valueOf(behavior_id));
+        Optional<BehaviorEntity> optBehaviorEntity = behaviorRepository.findById(Long.valueOf(behavior_id));
 
         List<RecordEntity> recordEntityList = new ArrayList<>();
 
-        if (optBehaviorEntity.isPresent()){
+        if (optBehaviorEntity.isPresent()) {
             BehaviorEntity behaviorEntity = optBehaviorEntity.get();
 
-            if(googleUserEntity.getUserId().equals(behaviorEntity.getStudentEntity().getGoogleUser().getUserId())){
+            if (googleUserEntity.getUserId().equals(behaviorEntity.getStudentEntity().getGoogleUser().getUserId())) {
 
-                RecordEntity recordEntity= RecordEntity.builder()
+                RecordEntity recordEntity = RecordEntity.builder()
                         .behaviorEntity(behaviorEntity)
-                        .time(LocalDateTime.now())
+                        .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).toLocalDateTime()) // 한국 시간으로 설정
                         .build();
 
                 recordRepository.save(recordEntity);
 
                 return recordConverter.recordEntityToDTO(recordEntity);
-
-
             }
 
             throw new IllegalStateException("해당 유저가 조작할 수 있는 행동이 아닙니다.");
         }
 
-
         throw new IllegalStateException("행동 id 맞지 않음");
-
     }
+
 
 
     public List<RecordLogsDTO> getDailyBehaviorLogs(){
