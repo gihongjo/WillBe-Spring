@@ -15,8 +15,6 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 
 public class GraphDailyDTO {
-    String behaviorId;
-    String behaviorName;
     List<Integer> graph;
 
 }

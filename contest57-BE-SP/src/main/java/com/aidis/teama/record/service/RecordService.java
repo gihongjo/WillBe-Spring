@@ -106,14 +106,11 @@ public class RecordService {
         LocalDateTime endOfDay = date.atTime(23, 59, 59);
 
 
+        List<RecordEntity> recordEntityList= recordRepository.findRecordingRecordsByGoogleUserIdAndBehaviorIdAndDate(
+                googleUserEntity.getId(),Long.valueOf(behavior_id), startOfDay,endOfDay);
 
+         return recordConverter.convertToGraphDailyDTO(recordEntityList);
 
-        log.info("데일리 오늘 것"+        recordRepository.findRecordingRecordsByGoogleUserIdAndBehaviorIdAndDate(
-                googleUserEntity.getId(),Long.valueOf(behavior_id), startOfDay,endOfDay)
-        );
-
-
-        return graphDailyDTO;
 
     }
 
