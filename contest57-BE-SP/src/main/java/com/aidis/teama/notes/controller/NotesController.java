@@ -1,10 +1,13 @@
 package com.aidis.teama.notes.controller;
 
 
+import com.aidis.teama.notes.db.DailyNoteEntity;
 import com.aidis.teama.notes.model.DailyNoteAddRequest;
 import com.aidis.teama.notes.service.NoteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @Slf4j
 @RestController
@@ -19,7 +22,7 @@ public class NotesController {
 
 
     @PostMapping(value = "/behavior/{behavior_id}/dailyNoteAdd")
-    public String BehaviorAdd(
+    public String DailyNoteAdd(
 
             @PathVariable(value = "behavior_id")
             String behavior_id,
@@ -37,6 +40,23 @@ public class NotesController {
 
 
     }
+
+    @PostMapping(value = "/behavior/{behavior_id}/dailyNoteView/date/{date}")
+    public DailyNoteEntity DailyNoteView(
+
+            @PathVariable(value = "behavior_id")
+            String behavior_id,
+            @PathVariable(value = "date")
+                    String date
+
+
+    ){
+
+        return noteService.viewDailyNote(behavior_id, LocalDate.parse(date));
+
+
+    }
+
 
 
 }

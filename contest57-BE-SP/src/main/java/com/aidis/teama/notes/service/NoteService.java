@@ -2,17 +2,13 @@ package com.aidis.teama.notes.service;
 
 import com.aidis.teama.behavior.db.BehaviorEntity;
 import com.aidis.teama.behavior.db.BehaviorRepository;
-import com.aidis.teama.behavior.service.BehaviorService;
 import com.aidis.teama.notes.db.DailyNoteEntity;
 import com.aidis.teama.notes.db.DailyNoteRepository;
 import com.aidis.teama.notes.model.DailyNoteAddRequest;
-import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
-import static org.hibernate.query.sqm.tree.SqmNode.log;
+import java.time.LocalDate;
 
 @Service
 public class NoteService {
@@ -40,8 +36,6 @@ public class NoteService {
         }
 
 
-        log.info("behaviorEntity.toString");
-        log.info(behaviorEntity.toString()+"ehere");
 
             DailyNoteEntity dailyNoteEntity = DailyNoteEntity.builder()
                     .behaviorEntity(behaviorEntity)
@@ -57,4 +51,17 @@ public class NoteService {
 
     }
 
+    public DailyNoteEntity viewDailyNote(String behaviorId, LocalDate date) {
+        BehaviorEntity behaviorEntity =
+                customUserDetailsService
+                        .userHasBehavior(customUserDetailsService.getCurrentUser(), Long.valueOf(behaviorId));
+        if (behaviorEntity == null) {
+            throw new IllegalArgumentException("BehaviorEntity not found");
+        }
+
+        return dailyNoteRepository.findByBehaviorEntityAndDate(behaviorEntity, date);
+
+
+
+    }
 }

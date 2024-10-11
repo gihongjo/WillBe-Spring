@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity(name = "DailyTable")
-@ToString(exclude = "DailyEntoty")
+@ToString(exclude = "DailyEntity")
 public class DailyNoteEntity {
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
