@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0c3fde5e-1efa-474b-8620-df70fb6f4dbc" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/WillBeLoggingApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/record/controller/RecordController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/record/db/RecordEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/record/db/RecordRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/record/model/GraphDailyDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/record/model/RecordLogsDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/record/service/RecordConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/record/service/RecordService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/behavior/db/BehaviorEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/behavior/db/BehaviorRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/behavior/model/BehaviorAddRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/behavior/model/BehaviorDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/behavior/model/StudentWithBehaviorDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/behavior/service/BehaviorService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/behavior/service/RecordingBehaviorConverter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/notes/db/DailyNoteEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/notes/db/DailyNoteRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/student/db/StudentEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/student/db/StudentRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/user/db/GoogleUserEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/user/db/GoogleUserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/user/model/CustomUserDetails.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/user/model/GoogleRegisterRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/user/model/ViewStudentBehaviorsDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/user/model/ViewStudentsDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/user/service/CustomUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/util/Jwt/JwtTokenFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/util/Jwt/JwtTokenProvider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/util/Jwt/TokenResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/util/config/config/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared/util/config/config/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/willbemsa/willbelogging/WillBeLoggingApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../contest57-BE-SP/.gradle/8.8/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../contest57-BE-SP/.gradle/8.8/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../contest57-BE-SP/.gradle/8.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../contest57-BE-SP/.gradle/8.8/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../contest57-BE-SP/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../contest57-BE-SP/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../contest57-BE-SP/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/../contest57-BE-SP/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../contest57-BE-SP/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../contest57-BE-SP/build.gradle" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="WillBe-Logging" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="WillBe-Logging" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="WillBe-Logging" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2nPdrLZhKjDofP60uJiNI3ggQgI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build WillBe-Logging.executor": "Run",
+    "Gradle.WillBe-Logging [bootJar].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.WillBeLoggingApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/gihongjo/AidisLab/k-paasContestDev/willbe-BE/WillBe-Logging",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging/shared" />
+      <recent name="$PROJECT_DIR$/src/main/java/org/willbemsa/willbelogging" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.willbemsa.willbelogging.shared.user.service" />
+      <recent name="org.willbemsa.willbelogging.shared" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.WillBe-Logging [bootJar]">
+    <configuration name="WillBe-Logging [bootJar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="bootJar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WillBeLoggingApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="WillBe-Logging.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.willbemsa.willbelogging.WillBeLoggingApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.WillBe-Logging [bootJar]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c3fde5e-1efa-474b-8620-df70fb6f4dbc" name="Changes" comment="" />
+      <created>1728878843926</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1728878843926</updated>
+      <workItem from="1728878845332" duration="3683000" />
+      <workItem from="1728883376257" duration="3757000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

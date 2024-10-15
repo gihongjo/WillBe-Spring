@@ -30,7 +30,6 @@ public class StudentEntity {
     private String status;
     private Timestamp createdAt;
 
-    private Color color;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "google_user_id") // 외래 키
