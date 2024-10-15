@@ -5,6 +5,7 @@ import com.aidis.teama.user.db.GoogleUserEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.awt.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,6 +29,9 @@ public class StudentEntity {
     private String expressionLevel;
     private String status;
     private Timestamp createdAt;
+
+    private Color color;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "google_user_id") // 외래 키
     private GoogleUserEntity googleUser;
