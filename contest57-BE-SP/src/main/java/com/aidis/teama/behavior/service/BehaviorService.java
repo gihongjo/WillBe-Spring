@@ -127,8 +127,11 @@ public class BehaviorService {
             String status
     ) {
 
-        if(isRecordingBehaviorOver6()==true){
-            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "기록하는 행동의 수가 6개를 초과할 수 없습니다.");
+        if(status.equals("recording")){
+            if(isRecordingBehaviorOver6()==true){
+                throw new ResponseStatusException(HttpStatus.NO_CONTENT, "기록하는 행동의 수가 6개를 초과할 수 없습니다.");
+            }
+
         }
 
         if(behaviorRepository.findById(Long.valueOf(bhv_id)).get().getStudentEntity()
