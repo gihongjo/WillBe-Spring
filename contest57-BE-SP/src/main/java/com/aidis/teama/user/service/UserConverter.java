@@ -39,7 +39,9 @@ public class UserConverter {
 
         List<ViewStudentBehaviorsDTO> viewStudentBehaviorsDTOS= new ArrayList<>();
 
+
         for(BehaviorEntity behaviorEntity : behaviorEntities){
+            if(behaviorEntity.getStatus().equals("recording"))
             viewStudentBehaviorsDTOS.add(ViewStudentBehaviorsDTO.builder()
                     .behaviorId(behaviorEntity.getId())
                     .behaviorName(behaviorEntity.getBehaviorName())
