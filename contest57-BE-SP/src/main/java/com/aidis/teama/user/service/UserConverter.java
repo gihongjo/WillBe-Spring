@@ -15,7 +15,7 @@ import java.util.List;
 public class UserConverter {
 
     public ViewStudentsDTO viewStudentsConverter(
-            StudentEntity studentEntity, List<BehaviorEntity> behaviorEntities
+            StudentEntity studentEntity, List<BehaviorEntity> behaviorEntities, String bhvStatus
     ){
         ViewStudentsDTO viewStudentsDTO = ViewStudentsDTO.builder()
                 .studentId(studentEntity.getId())
@@ -24,7 +24,7 @@ public class UserConverter {
                 .created_at(studentEntity.getCreatedAt())
                 .status(studentEntity.getStatus())
                 .birthday(studentEntity.getBirthday())
-                .viewStudentBehaviorsDTOList(viewBehaviorConverter(behaviorEntities))
+                .viewStudentBehaviorsDTOList(viewBehaviorConverter(behaviorEntities,bhvStatus))
                 .build();
 
 
@@ -34,14 +34,14 @@ public class UserConverter {
 
 
     public List<ViewStudentBehaviorsDTO> viewBehaviorConverter(
-            List<BehaviorEntity> behaviorEntities
+            List<BehaviorEntity> behaviorEntities, String bhvStatus
     ){
 
         List<ViewStudentBehaviorsDTO> viewStudentBehaviorsDTOS= new ArrayList<>();
 
 
         for(BehaviorEntity behaviorEntity : behaviorEntities){
-            if(behaviorEntity.getStatus().equals("recording"))
+            if(behaviorEntity.getStatus().equals(bhvStatus))
             viewStudentBehaviorsDTOS.add(ViewStudentBehaviorsDTO.builder()
                     .behaviorId(behaviorEntity.getId())
                     .behaviorName(behaviorEntity.getBehaviorName())

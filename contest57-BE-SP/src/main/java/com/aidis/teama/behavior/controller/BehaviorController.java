@@ -1,6 +1,7 @@
 package com.aidis.teama.behavior.controller;
 
 import com.aidis.teama.behavior.model.BehaviorAddRequest;
+import com.aidis.teama.behavior.model.BehaviorFinishRequest;
 import com.aidis.teama.behavior.model.StudentWithBehaviorDTO;
 import com.aidis.teama.behavior.service.BehaviorService;
 import com.aidis.teama.user.service.CustomUserDetailsService;
@@ -46,15 +47,23 @@ public class BehaviorController {
 
     }
 
-    @GetMapping(value = "/{behavior_id}/status/{status}")
+    @PostMapping(value = "/{behavior_id}/status_change/{status}")
     public String setBehaviorStatus(
             @PathVariable(value = "behavior_id")
             String behavior_id,
             @PathVariable(value = "status")
-            String status
+            String status,
+            @RequestBody
+            BehaviorFinishRequest behaviorFinishRequest
+
+
     ){
-        return behaviorService.setBehaviorStatus(behavior_id, status);
+
+
+        return behaviorService.setBehaviorStatus(behavior_id, status,behaviorFinishRequest);
     }
+
+
 
 
 

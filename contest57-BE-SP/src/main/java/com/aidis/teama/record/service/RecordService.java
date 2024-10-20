@@ -103,7 +103,7 @@ public class RecordService {
         Optional<BehaviorEntity> optBehaviorEntity =behaviorRepository.findById(Long.valueOf(behavior_id));
 
         if(optBehaviorEntity.isPresent()) {
-            if(optBehaviorEntity.get().getStudentEntity().getStudent_name().equals(googleUserEntity.getUserName())){
+            if(optBehaviorEntity.get().getStudentEntity().getGoogleUser().getUserName().equals(googleUserEntity.getUserName())){
 
                 GraphDailyDTO graphDailyDTO = null;
 
@@ -116,7 +116,8 @@ public class RecordService {
 
                 return recordConverter.convertToGraphDailyDTO(recordEntityList);
 
-            }else             throw new IllegalAccessException("해당 유저는 해당 행동에 대한 권한이 없습니다.");
+            }else
+                throw new IllegalAccessException("해당 유저는 해당 행동에 대한 권한이 없습니다.");
 
 
         }else

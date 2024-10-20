@@ -3,6 +3,7 @@ package com.aidis.teama.behavior.service;
 import com.aidis.teama.behavior.db.BehaviorEntity;
 import com.aidis.teama.behavior.db.BehaviorRepository;
 import com.aidis.teama.behavior.model.BehaviorAddRequest;
+import com.aidis.teama.behavior.model.BehaviorFinishRequest;
 import com.aidis.teama.behavior.model.StudentWithBehaviorDTO;
 import com.aidis.teama.student.db.StudentEntity;
 import com.aidis.teama.student.db.StudentRepository;
@@ -124,7 +125,8 @@ public class BehaviorService {
 
     public String setBehaviorStatus(
             String bhv_id,
-            String status
+            String status,
+            BehaviorFinishRequest behaviorFinishRequest
     ) {
 
         if(status.equals("recording")){
@@ -141,7 +143,13 @@ public class BehaviorService {
 
 
 
-        int updatedCount= behaviorRepository.updateStatusByBehaviorId(Long.valueOf(bhv_id), status);
+        int updatedCount= behaviorRepository.updateStatusByBehaviorId(
+                Long.valueOf(bhv_id),
+                status,
+                behaviorFinishRequest.overDescription,
+                behaviorFinishRequest.overMeaning,
+                behaviorFinishRequest.overMeasures);
+
         if(updatedCount == 0){
             throw new EntityNotFoundException("BehaviorEntity with id " + Long.valueOf(bhv_id)  + " not found.");
         }

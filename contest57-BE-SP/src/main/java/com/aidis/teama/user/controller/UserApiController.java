@@ -54,10 +54,12 @@ public class UserApiController {
     }
 
     @GetMapping(value = "/view_students/behaviors")
-    public List<ViewStudentsDTO> viewStudentsAndBehaviors(){
+    public List<ViewStudentsDTO> viewStudentsAndBehaviors(
+
+    ){
 
         GoogleUserEntity googleUserEntity= customUserDetailsService.getCurrentUser();
-        return userService.ViewStudentsBehaviors(googleUserEntity);
+        return userService.ViewStudentsBehaviors(googleUserEntity,"recording");
 
     }
 

@@ -99,7 +99,7 @@ public class UserService {
 
 
     public List<ViewStudentsDTO> ViewStudentsBehaviors(
-            GoogleUserEntity googleUserEntity
+            GoogleUserEntity googleUserEntity, String bhvStatus
     ) {
         List<StudentEntity> studentEntityList = studentRepository.findByGoogleUserOrderByCreatedAtDesc(googleUserEntity);
 
@@ -108,7 +108,7 @@ public class UserService {
 
         for (StudentEntity studentEntity : studentEntityList) {
 
-            viewStudentsDTOList.add(userConverter.viewStudentsConverter(studentEntity, studentEntity.getBehaviors()));
+            viewStudentsDTOList.add(userConverter.viewStudentsConverter(studentEntity, studentEntity.getBehaviors(),bhvStatus));
 
         }
         return viewStudentsDTOList;

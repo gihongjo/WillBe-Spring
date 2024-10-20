@@ -25,6 +25,7 @@
         private String recordType;
         private String status;
 
+
         @ManyToOne(fetch = FetchType.EAGER)
         @JoinColumn(name = "student_id") // 외래 키
         private StudentEntity studentEntity;
@@ -32,6 +33,11 @@
 
         @OneToMany(mappedBy = "behaviorEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
         private List<DailyNoteEntity> dailyNoteEntities;
+
+
+        private String overDescription;
+        private String overMeaning;
+        private String overMeasures;
 
 
     }
