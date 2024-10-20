@@ -5,6 +5,7 @@ import com.aidis.teama.behavior.db.BehaviorRepository;
 import com.aidis.teama.record.db.RecordEntity;
 import com.aidis.teama.record.db.RecordRepository;
 import com.aidis.teama.record.model.GraphDailyDTO;
+import com.aidis.teama.record.model.GraphWeeklyDTO;
 import com.aidis.teama.record.model.RecordLogsDTO;
 import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.user.db.GoogleUserEntity;
@@ -95,21 +96,31 @@ public class RecordService {
 
     public GraphDailyDTO getGraphDaily(
             String behavior_id, LocalDate date
-    ){
+    ) throws IllegalAccessException {
 
         GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
 
+        Optional<BehaviorEntity> optBehaviorEntity =behaviorRepository.findById(Long.valueOf(behavior_id));
 
-        GraphDailyDTO graphDailyDTO = null;
+        if(optBehaviorEntity.isPresent()) {
+            if(optBehaviorEntity.get().getStudentEntity().getStudent_name().equals(googleUserEntity.getUserName())){
 
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(23, 59, 59);
+                GraphDailyDTO graphDailyDTO = null;
+
+                LocalDateTime startOfDay = date.atStartOfDay();
+                LocalDateTime endOfDay = date.atTime(23, 59, 59);
 
 
-        List<RecordEntity> recordEntityList= recordRepository.findRecordingRecordsByGoogleUserIdAndBehaviorIdAndDate(
-                googleUserEntity.getId(),Long.valueOf(behavior_id), startOfDay,endOfDay);
+                List<RecordEntity> recordEntityList= recordRepository.findRecordingRecordsByGoogleUserIdAndBehaviorIdAndDate(
+                        googleUserEntity.getId(),Long.valueOf(behavior_id), startOfDay,endOfDay);
 
-         return recordConverter.convertToGraphDailyDTO(recordEntityList);
+                return recordConverter.convertToGraphDailyDTO(recordEntityList);
+
+            }else             throw new IllegalAccessException("해당 유저는 해당 행동에 대한 권한이 없습니다.");
+
+
+        }else
+            throw new IllegalAccessException("해당 행동이 없습니다.");
 
 
     }
@@ -130,14 +141,48 @@ public class RecordService {
                     recordRepository.deleteById(Long.valueOf(recordId));
                     return true;
                 }
-
-
         }
-
-
-
         return false;
 
+    }
+
+
+    public GraphWeeklyDTO getGraphWeekly(String behaviorId, LocalDate endDate) {
+        GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
+
+
+
+
+        // 일주일 전 날짜 계산 (오늘 포함 7일)
+        LocalDate startDate = endDate.minusDays(6);
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+
+        // 레코드 조회
+        List<RecordEntity> recordEntities = recordRepository
+                .findRecordingRecordsByGoogleUserIdAndBehaviorIdBetweenDates(
+                        googleUserEntity.getId(),
+                        Long.valueOf(behaviorId),
+                        startDateTime,
+                        endDateTime
+                );
+
+        // 날짜별 카운트 초기화
+        List<Integer> dailyCounts = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            dailyCounts.add(0);
+        }
+
+        // 각 레코드를 해당 날짜에 카운트
+        for (RecordEntity record : recordEntities) {
+            LocalDate recordDate = record.getTime().toLocalDate();
+            long daysBetween = startDate.until(recordDate).getDays();
+            if (daysBetween >= 0 && daysBetween < 7) {
+                dailyCounts.set((int) daysBetween, dailyCounts.get((int) daysBetween) + 1);
+            }
+        }
+
+        return new GraphWeeklyDTO(dailyCounts);
     }
 
 }

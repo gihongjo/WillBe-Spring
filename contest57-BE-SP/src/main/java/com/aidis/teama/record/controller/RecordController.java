@@ -2,6 +2,7 @@ package com.aidis.teama.record.controller;
 
 import com.aidis.teama.record.db.RecordRepository;
 import com.aidis.teama.record.model.GraphDailyDTO;
+import com.aidis.teama.record.model.GraphWeeklyDTO;
 import com.aidis.teama.record.model.RecordLogsDTO;
 import com.aidis.teama.record.service.RecordService;
 import com.aidis.teama.user.db.GoogleUserEntity;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 @Slf4j
@@ -45,17 +47,7 @@ public class RecordController {
 
     }
 
-    @GetMapping(value = "/graph/daily/{behavior_id}")
-    public GraphDailyDTO getGraphDaily(
 
-            @PathVariable("behavior_id")
-            String behavior_id
-    ){
-
-        return recordService.getGraphDaily(behavior_id, LocalDate.now());
-
-
-    }
 
 
     @GetMapping(value = "/{record_id}/delete")
@@ -69,6 +61,28 @@ public class RecordController {
 
     }
 
+    @GetMapping(value = "/graph/daily/{behavior_id}")
+    public GraphDailyDTO getGraphDaily(
 
+            @PathVariable("behavior_id")
+            String behavior_id
+    ) throws IllegalAccessException {
+
+        return recordService.getGraphDaily(behavior_id, LocalDate.now());
+
+
+    }
+    @GetMapping(value = "/graph/weekly/{behavior_id}")
+    public GraphWeeklyDTO getGraphWeekly(
+            @PathVariable("behavior_id") String behavior_id
+    ) {
+
+
+
+        LocalDate today = LocalDate.now(ZoneId.of("Asia/Seoul"));
+        return recordService.getGraphWeekly(behavior_id, today);
+
+
+    }
 
 }

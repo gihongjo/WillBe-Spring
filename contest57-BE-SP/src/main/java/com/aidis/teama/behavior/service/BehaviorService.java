@@ -8,6 +8,7 @@ import com.aidis.teama.student.db.StudentEntity;
 import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.user.db.GoogleUserRepository;
 import com.aidis.teama.user.service.CustomUserDetailsService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -86,7 +87,7 @@ public class BehaviorService {
         }
     }
 
-    public List<StudentWithBehaviorDTO> getRecordingBehaviorList(){
+    public List<StudentWithBehaviorDTO> getRecordingBehaviorsByStatusList(String bhvStatus){
 
         List<StudentWithBehaviorDTO> studentWithBehaviorDTOList = new ArrayList<>();
 
@@ -96,7 +97,7 @@ public class BehaviorService {
         for(StudentEntity studentEntity :studentEntityList){
 
             List<BehaviorEntity> behaviorEntityList =
-                    behaviorRepository.findAllByStudentEntityAndAndStatus(studentEntity,"recording");
+                    behaviorRepository.findAllByStudentEntityAndAndStatus(studentEntity,bhvStatus);
 
             for(BehaviorEntity behaviorEntity: behaviorEntityList){
 
@@ -110,4 +111,24 @@ public class BehaviorService {
 
     }
 
+    public boolean setBehaviorStatus(
+            String bhv_id,
+            String status
+    ) {
+
+
+        if(behaviorRepository.findById(Long.valueOf(bhv_id)).get().getStudentEntity()
+                .getGoogleUser().getUserName().equals(customUserDetailsService.getCurrentUser().getUserName())==false){
+            throw new IllegalStateException("권한 없음");
+        }
+
+
+
+        int updatedCount= behaviorRepository.updateStatusByBehaviorId(Long.valueOf(bhv_id), status);
+        if(updatedCount == 0){
+            throw new EntityNotFoundException("BehaviorEntity with id " + Long.valueOf(bhv_id)  + " not found.");
+        }
+
+        return true;
+    }
 }

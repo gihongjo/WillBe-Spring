@@ -28,4 +28,15 @@ public interface RecordRepository extends JpaRepository<RecordEntity,Long> {
 
     void deleteById(Long id);
 
+
+
+    @Query("SELECT r FROM recordTable r JOIN r.behaviorEntity b JOIN b.studentEntity s JOIN s.googleUser g "
+            + "WHERE g.id = :googleUserId AND b.id = :behaviorId AND b.status = 'recording' "
+            + "AND r.time BETWEEN :startDate AND :endDate")
+    List<RecordEntity> findRecordingRecordsByGoogleUserIdAndBehaviorIdBetweenDates(
+            @Param("googleUserId") Long googleUserId,
+            @Param("behaviorId") Long behaviorId,
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate);
+
 }
