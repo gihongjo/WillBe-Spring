@@ -158,7 +158,7 @@ public class BehaviorService {
             List<BehaviorEntity> behaviorEntity= behaviorRepository.findAllByStudentEntityAndStatus(studentEntity,"recording");
             bhvCount+=behaviorEntity.size();
             log.info(behaviorEntity.toString());
-            if(bhvCount=>6)
+            if(bhvCount>=6)
                 return true;
         }
         if(bhvCount>=6)
