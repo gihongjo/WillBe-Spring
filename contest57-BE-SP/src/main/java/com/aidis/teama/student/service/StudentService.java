@@ -42,10 +42,10 @@ public class StudentService {
     public String firstStudentAdd(
             FirstStudentAddRequest firstStudentAddRequest
     ){
-
-        GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
         if(isRecordingBehaviorOver6()==true)
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "기록하는 행동의 수가 6개를 초과할 수 없습니다.");
+
+        GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
 
         var studentEntity = StudentEntity.builder()
                 .student_name(firstStudentAddRequest.getStudentName())

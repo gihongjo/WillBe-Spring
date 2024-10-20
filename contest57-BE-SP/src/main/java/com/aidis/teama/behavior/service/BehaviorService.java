@@ -45,9 +45,9 @@ public class BehaviorService {
 
     //행동 생성 시
     public String BehaviorAdd(BehaviorAddRequest behaviorAddRequest) {
-        if(isRecordingBehaviorOver6()==true){
+        if(isRecordingBehaviorOver6()==true)
+
             throw new ResponseStatusException(HttpStatus.NO_CONTENT, "기록하는 행동의 수가 6개를 초과할 수 없습니다.");
-        }
 
 
         try {
@@ -156,13 +156,14 @@ public class BehaviorService {
                 = studentRepository.findAllByGoogleUser(customUserDetailsService.getCurrentUser());
         for(StudentEntity studentEntity:studentEntityList){
             List<BehaviorEntity> behaviorEntity= behaviorRepository.findAllByStudentEntityAndStatus(studentEntity,"recording");
-
-            log.info(behaviorEntity.toString());
-
             bhvCount+=behaviorEntity.size();
-            if(bhvCount>6)
+            log.info(behaviorEntity.toString());
+            if(bhvCount=>6)
                 return true;
         }
+        if(bhvCount>=6)
+            return true;
         return false;
     }
+
 }
