@@ -28,7 +28,7 @@ public class StudentController {
             StudentAddRequest studentAddRequest
     ) {
         log.info(studentAddRequest.toString());
-        return studentService.add(studentAddRequest);
+        return studentService.studentAdd(studentAddRequest);
     }
 
 

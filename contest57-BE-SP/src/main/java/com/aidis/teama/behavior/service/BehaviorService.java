@@ -44,6 +44,8 @@ public class BehaviorService {
         try {
             var googleUserEntity= customUserDetailsService.getCurrentUser();
 
+
+
             Optional<StudentEntity> optionalStudentEntity = studentRepository.findById(behaviorAddRequest.getStudentId());
 
             if (optionalStudentEntity.isPresent()) {

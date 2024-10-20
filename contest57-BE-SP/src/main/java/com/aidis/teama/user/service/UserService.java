@@ -1,6 +1,7 @@
 package com.aidis.teama.user.service;
 
 import com.aidis.teama.behavior.db.BehaviorEntity;
+import com.aidis.teama.behavior.db.BehaviorRepository;
 import com.aidis.teama.student.db.StudentEntity;
 import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.student.model.StudentDTO;
@@ -136,4 +137,6 @@ public class UserService {
             throw new IllegalStateException("유저 정보 불일치");
         }
     }
+
+
 }

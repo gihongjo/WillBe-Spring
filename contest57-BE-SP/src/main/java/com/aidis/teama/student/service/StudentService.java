@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,6 +40,8 @@ public class StudentService {
     ){
 
         GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
+        if(isRecordingBehaviorOver6()==true)
+            return "행동의 수가 6개를 초과할 수 없습니다.";
 
         var studentEntity = StudentEntity.builder()
                 .student_name(firstStudentAddRequest.getStudentName())
@@ -70,7 +73,11 @@ public class StudentService {
     }
 
 
-    public ResponseEntity<String> add(StudentAddRequest studentAddRequest) {
+    public ResponseEntity<String> studentAdd(StudentAddRequest studentAddRequest) {
+
+        if(isRecordingBehaviorOver6()==true)
+
+            return ResponseEntity.ok("행동의 수가 6개를 초과할 수 없습니다.");
 
 
         GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
@@ -100,5 +107,21 @@ public class StudentService {
         }else {
             throw new IllegalStateException("JWT Error");
         }
+    }
+
+
+    //기록중인 행동이 6개 이상이면 true 반환
+    public boolean isRecordingBehaviorOver6(){
+        int bhvCount=0;
+
+        List<StudentEntity> studentEntityList
+                = studentRepository.findAllByGoogleUser(customUserDetailsService.getCurrentUser());
+        for(StudentEntity studentEntity:studentEntityList){
+            List<BehaviorEntity> behaviorEntity= behaviorRepository.findAllByStudentEntityAndAndStatus(studentEntity,"recording");
+            bhvCount+=behaviorEntity.size();
+            if(bhvCount>6)
+                return true;
+        }
+        return false;
     }
 }
