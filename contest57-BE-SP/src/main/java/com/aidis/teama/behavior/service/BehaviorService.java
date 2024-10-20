@@ -9,14 +9,18 @@ import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.user.db.GoogleUserRepository;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
+@Slf4j
 public class BehaviorService {
 
     private final BehaviorRepository behaviorRepository;
@@ -40,7 +44,12 @@ public class BehaviorService {
 
 
     //행동 생성 시
-    public ResponseEntity<String> BehaviorAdd(BehaviorAddRequest behaviorAddRequest) {
+    public String BehaviorAdd(BehaviorAddRequest behaviorAddRequest) {
+        if(isRecordingBehaviorOver6()==true){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "기록하는 행동의 수가 6개를 초과할 수 없습니다.");
+        }
+
+
         try {
             var googleUserEntity= customUserDetailsService.getCurrentUser();
 
@@ -77,7 +86,7 @@ public class BehaviorService {
                             .build();
 
                     behaviorRepository.save(behaviorEntity);
-                    return ResponseEntity.ok("Behavior added successfully.");
+                    return "Behavior added successfully.";
                 } else {
                     throw new IllegalStateException("Unauthorized to add behavior for this student.");
                 }
@@ -99,7 +108,7 @@ public class BehaviorService {
         for(StudentEntity studentEntity :studentEntityList){
 
             List<BehaviorEntity> behaviorEntityList =
-                    behaviorRepository.findAllByStudentEntityAndAndStatus(studentEntity,bhvStatus);
+                    behaviorRepository.findAllByStudentEntityAndStatus(studentEntity,bhvStatus);
 
             for(BehaviorEntity behaviorEntity: behaviorEntityList){
 
@@ -113,11 +122,14 @@ public class BehaviorService {
 
     }
 
-    public boolean setBehaviorStatus(
+    public String setBehaviorStatus(
             String bhv_id,
             String status
     ) {
 
+        if(isRecordingBehaviorOver6()==true){
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "기록하는 행동의 수가 6개를 초과할 수 없습니다.");
+        }
 
         if(behaviorRepository.findById(Long.valueOf(bhv_id)).get().getStudentEntity()
                 .getGoogleUser().getUserName().equals(customUserDetailsService.getCurrentUser().getUserName())==false){
@@ -131,6 +143,26 @@ public class BehaviorService {
             throw new EntityNotFoundException("BehaviorEntity with id " + Long.valueOf(bhv_id)  + " not found.");
         }
 
-        return true;
+        return "완료";
+    }
+
+
+
+
+    public boolean isRecordingBehaviorOver6(){
+        int bhvCount=0;
+
+        List<StudentEntity> studentEntityList
+                = studentRepository.findAllByGoogleUser(customUserDetailsService.getCurrentUser());
+        for(StudentEntity studentEntity:studentEntityList){
+            List<BehaviorEntity> behaviorEntity= behaviorRepository.findAllByStudentEntityAndStatus(studentEntity,"recording");
+
+            log.info(behaviorEntity.toString());
+
+            bhvCount+=behaviorEntity.size();
+            if(bhvCount>6)
+                return true;
+        }
+        return false;
     }
 }

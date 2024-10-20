@@ -13,13 +13,12 @@ import java.util.List;
 public interface BehaviorRepository extends JpaRepository<BehaviorEntity,Long> {
 
      public List<BehaviorEntity> findAllByStudentEntity(StudentEntity studentEntity);
-     public List<BehaviorEntity> findAllByStudentEntityAndAndStatus(StudentEntity studentEntity, String status);
+     public List<BehaviorEntity> findAllByStudentEntityAndStatus(StudentEntity studentEntity, String status);
 
      @Modifying
      @Transactional
      @Query("UPDATE behaviorTable b SET b.status = :status WHERE b.id = :behaviorId")
      int updateStatusByBehaviorId(@Param("behaviorId") Long behaviorId, @Param("status") String status);
-
 
 
 }

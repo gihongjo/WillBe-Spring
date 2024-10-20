@@ -8,9 +8,12 @@ import com.aidis.teama.student.model.FirstStudentAddRequest;
 import com.aidis.teama.student.model.StudentAddRequest;
 import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.service.CustomUserDetailsService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -18,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class StudentService {
 
     private final StudentRepository studentRepository;
@@ -41,7 +45,7 @@ public class StudentService {
 
         GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
         if(isRecordingBehaviorOver6()==true)
-            return "행동의 수가 6개를 초과할 수 없습니다.";
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "기록하는 행동의 수가 6개를 초과할 수 없습니다.");
 
         var studentEntity = StudentEntity.builder()
                 .student_name(firstStudentAddRequest.getStudentName())
@@ -77,7 +81,7 @@ public class StudentService {
 
         if(isRecordingBehaviorOver6()==true)
 
-            return ResponseEntity.ok("행동의 수가 6개를 초과할 수 없습니다.");
+            throw new ResponseStatusException(HttpStatus.NO_CONTENT, "기록하는 행동의 수가 6개를 초과할 수 없습니다.");
 
 
         GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
@@ -117,11 +121,13 @@ public class StudentService {
         List<StudentEntity> studentEntityList
                 = studentRepository.findAllByGoogleUser(customUserDetailsService.getCurrentUser());
         for(StudentEntity studentEntity:studentEntityList){
-            List<BehaviorEntity> behaviorEntity= behaviorRepository.findAllByStudentEntityAndAndStatus(studentEntity,"recording");
+            List<BehaviorEntity> behaviorEntity= behaviorRepository.findAllByStudentEntityAndStatus(studentEntity,"recording");
             bhvCount+=behaviorEntity.size();
-            if(bhvCount>6)
+            log.info(behaviorEntity.toString());
+            if(bhvCount>=6)
                 return true;
         }
+
         return false;
     }
 }

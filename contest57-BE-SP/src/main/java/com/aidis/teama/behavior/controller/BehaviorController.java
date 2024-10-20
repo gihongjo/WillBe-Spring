@@ -5,7 +5,6 @@ import com.aidis.teama.behavior.model.StudentWithBehaviorDTO;
 import com.aidis.teama.behavior.service.BehaviorService;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,7 +27,7 @@ public class BehaviorController {
 
 
     @PostMapping(value = "/add")
-    public ResponseEntity<String> BehaviorAdd(
+    public String BehaviorAdd(
             @RequestBody
             BehaviorAddRequest behaviorAddRequest
     ){
@@ -48,7 +47,7 @@ public class BehaviorController {
     }
 
     @GetMapping(value = "/{behavior_id}/status/{status}")
-    public boolean setBehaviorStatus(
+    public String setBehaviorStatus(
             @PathVariable(value = "behavior_id")
             String behavior_id,
             @PathVariable(value = "status")
