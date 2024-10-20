@@ -43,6 +43,7 @@ public class UserConverter {
             viewStudentBehaviorsDTOS.add(ViewStudentBehaviorsDTO.builder()
                     .behaviorId(behaviorEntity.getId())
                     .behaviorName(behaviorEntity.getBehaviorName())
+                            .behaviorStatus(behaviorEntity.getStatus())
                     .build()
             );
         }

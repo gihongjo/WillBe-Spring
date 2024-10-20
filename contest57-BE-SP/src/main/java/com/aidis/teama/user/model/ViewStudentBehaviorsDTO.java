@@ -12,12 +12,12 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-
 public class ViewStudentBehaviorsDTO {
 
 
     private Long behaviorId;
     private String behaviorName;
+    private String behaviorStatus;
 
 
 }
