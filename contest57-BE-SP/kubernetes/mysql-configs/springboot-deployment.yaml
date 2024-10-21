@@ -4,7 +4,7 @@ metadata:
   name: springboot-deployment
   namespace: spring
   labels:
-    app: combined-app
+    app: willbe-app
 spec:
   replicas: 1
   selector:
