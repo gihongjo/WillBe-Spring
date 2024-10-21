@@ -99,24 +99,21 @@ public class BehaviorService {
         }
     }
 
-    public List<StudentWithBehaviorDTO> getRecordingBehaviorsByStatusList(String bhvStatus){
+    public List<StudentWithBehaviorDTO> getRecordingBehaviorsByStatusList(String studentId,String bhvStatus){
 
         List<StudentWithBehaviorDTO> studentWithBehaviorDTOList = new ArrayList<>();
 
-        List<StudentEntity> studentEntityList=
-                studentRepository.findByGoogleUserOrderByCreatedAtDesc(customUserDetailsService.getCurrentUser());
+        Optional<StudentEntity> optStudentEntity= studentRepository.findById(Long.valueOf(studentId));
 
-        for(StudentEntity studentEntity :studentEntityList){
+        if(optStudentEntity.isPresent()){
 
-            List<BehaviorEntity> behaviorEntityList =
-                    behaviorRepository.findAllByStudentEntityAndStatus(studentEntity,bhvStatus);
+            StudentEntity studentEntity=optStudentEntity.get();
+            List<BehaviorEntity> behaviorEntityList = behaviorRepository.findAllByStudentEntityAndStatus(studentEntity,bhvStatus);
 
-            for(BehaviorEntity behaviorEntity: behaviorEntityList){
-
-                studentWithBehaviorDTOList
-                        .add(recordingBehaviorConverter.BehaviorToRecordingBehaviorDTO(behaviorEntity));
-
+            for(BehaviorEntity behaviorEntity : behaviorEntityList){
+                studentWithBehaviorDTOList.add(recordingBehaviorConverter.BehaviorToRecordingBehaviorDTO(behaviorEntity));
             }
+
         }
 
         return studentWithBehaviorDTOList;

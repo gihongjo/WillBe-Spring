@@ -19,6 +19,9 @@ public class RecordingBehaviorConverter {
                 .behaviorName(behaviorEntity.getBehaviorName())
                 .behaviorType(behaviorEntity.getBehaviorType())
                 .recordType(behaviorEntity.getRecordType())
+                .overMeaning(behaviorEntity.getOverMeaning())
+                .overDescription(behaviorEntity.getOverDescription())
+                .overMeasures(behaviorEntity.getOverMeasures())
                 .status(behaviorEntity.getStatus())
                 .build();
         return entity;

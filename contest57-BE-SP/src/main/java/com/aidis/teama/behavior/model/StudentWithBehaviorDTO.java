@@ -22,5 +22,8 @@ public class StudentWithBehaviorDTO {
     private String behaviorName;
     private String recordType;
     private String status;
+    private String overDescription;
+    private String overMeaning;
+    private String overMeasures;
 
 }

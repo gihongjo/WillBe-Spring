@@ -9,11 +9,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: springboot
+      app: willbe-app
   template:
     metadata:
       labels:
-        app: springboot
+        app: willbe-app
     spec:
       containers:
         - name: springboot-container
