@@ -38,17 +38,26 @@ public class BehaviorController {
     }
 
     @GetMapping(value = "/{student_id}/status/{behavior_status}")
-    public List<StudentWithBehaviorDTO> GetBehavioerByStatus(
+    public List<StudentWithBehaviorDTO> GetStudentsBehaviorsByStatus(
             @PathVariable(value = "student_id")
             String studentId,
             @PathVariable(value = "behavior_status")
             String bhvStatus
     ){
 
-        return behaviorService.getRecordingBehaviorsByStatusList(studentId,bhvStatus);
+        return behaviorService.getStudentsBehaviorsByStatusList(studentId,bhvStatus);
 
     }
 
+    @GetMapping(value = "/status/{behavior_status}")
+    public List<StudentWithBehaviorDTO> GetBehaviorsByStatus(
+            @PathVariable(value = "behavior_status")
+            String bhvStatus
+    ){
+
+        return behaviorService.getRecordingBehaviorsByStatusList(bhvStatus);
+
+    }
 
 
 
