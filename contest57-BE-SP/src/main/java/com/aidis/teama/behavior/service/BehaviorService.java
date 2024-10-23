@@ -71,7 +71,7 @@ public class BehaviorService {
                                 .getBehaviorName())).findFirst().isPresent();
 
                 if(behavior){
-                    return ("해당 아동은 이미 같은 이름의 행동을 가지고 있습니다.");
+                    throw new IllegalStateException("해당 아동은 이미 같은 이름의 행동을 가지고 있습니다.");
 
                 }
 
