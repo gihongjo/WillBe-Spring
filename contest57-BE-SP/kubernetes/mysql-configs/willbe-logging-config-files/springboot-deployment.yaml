@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: springboot-deployment
-  namespace: spring
+  namespace: spring-log
   labels:
-    app: combined-app
+    app: willbe-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: springboot
+      app: willbe-app
   template:
     metadata:
       labels:
-        app: springboot
+        app: willbe-app
     spec:
       containers:
         - name: springboot-container
-          image: team57-server-container-image.kr.ncr.ntruss.com/willbe-server:latest
+          image: team57-container-image.kr.ncr.ntruss.com/willbe-logging:latest
           ports:
             - containerPort: 8080
       imagePullSecrets:
