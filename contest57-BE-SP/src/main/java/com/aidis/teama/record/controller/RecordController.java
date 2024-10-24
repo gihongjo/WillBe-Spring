@@ -15,7 +15,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("api/record")
+@RequestMapping("/api/record")
 public class RecordController {
 
 
