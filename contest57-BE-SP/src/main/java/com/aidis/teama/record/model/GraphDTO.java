@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class GraphWeeklyDTO {
+public class GraphDTO {
 
     List<Integer> graph;
 

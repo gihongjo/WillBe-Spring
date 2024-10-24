@@ -5,7 +5,7 @@ import com.aidis.teama.behavior.db.BehaviorRepository;
 import com.aidis.teama.record.db.RecordEntity;
 import com.aidis.teama.record.db.RecordRepository;
 import com.aidis.teama.record.model.GraphDailyDTO;
-import com.aidis.teama.record.model.GraphWeeklyDTO;
+import com.aidis.teama.record.model.GraphDTO;
 import com.aidis.teama.record.model.RecordLogsDTO;
 import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.user.db.GoogleUserEntity;
@@ -17,13 +17,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static org.hibernate.query.sqm.tree.SqmNode.log;
 
 @Service
 @Component
@@ -148,7 +147,7 @@ public class RecordService {
     }
 
 
-    public GraphWeeklyDTO getGraphWeekly(String behaviorId, LocalDate endDate) {
+    public GraphDTO getGraphWeekly(String behaviorId, LocalDate endDate) {
         GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
 
 
@@ -183,7 +182,44 @@ public class RecordService {
             }
         }
 
-        return new GraphWeeklyDTO(dailyCounts);
+        return new GraphDTO(dailyCounts);
     }
+
+
+
+    public GraphDTO getGraphMonthly(String behaviorId, LocalDate endDate) {
+        GoogleUserEntity googleUserEntity = customUserDetailsService.getCurrentUser();
+
+        // 한 달 전 날짜 계산 (오늘 포함 30일)
+        LocalDate startDate = endDate.minusDays(29); // 총 30일간의 데이터
+        LocalDateTime startDateTime = startDate.atStartOfDay();
+        LocalDateTime endDateTime = endDate.atTime(23, 59, 59);
+
+        // 레코드 조회
+        List<RecordEntity> recordEntities = recordRepository
+                .findRecordingRecordsByGoogleUserIdAndBehaviorIdBetweenDates(
+                        googleUserEntity.getId(),
+                        Long.valueOf(behaviorId),
+                        startDateTime,
+                        endDateTime
+                );
+
+        // 날짜별 카운트 초기화
+        List<Integer> dailyCounts = new ArrayList<>(Collections.nCopies(30, 0));
+
+        // 각 레코드를 해당 날짜에 카운트
+        for (RecordEntity record : recordEntities) {
+            LocalDate recordDate = record.getTime().toLocalDate();
+            long daysBetween = ChronoUnit.DAYS.between(startDate, recordDate);
+            if (daysBetween >= 0 && daysBetween < 30) {
+                int index = (int) daysBetween;
+                dailyCounts.set(index, dailyCounts.get(index) + 1);
+            }
+        }
+
+        return new GraphDTO(dailyCounts);
+    }
+
+
 
 }
