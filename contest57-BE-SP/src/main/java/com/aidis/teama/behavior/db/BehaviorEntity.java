@@ -1,6 +1,5 @@
     package com.aidis.teama.behavior.db;
 
-    import com.aidis.teama.notes.db.DailyNoteEntity;
     import com.aidis.teama.student.db.StudentEntity;
     import jakarta.persistence.*;
     import lombok.*;
@@ -31,8 +30,6 @@
         private StudentEntity studentEntity;
 
 
-        @OneToMany(mappedBy = "behaviorEntity", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-        private List<DailyNoteEntity> dailyNoteEntities;
 
 
         private String overDescription;
