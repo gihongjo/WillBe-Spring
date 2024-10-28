@@ -8,7 +8,10 @@ import com.aidis.teama.record.model.TimeStampsDTO;
 import com.aidis.teama.record.service.RecordService;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

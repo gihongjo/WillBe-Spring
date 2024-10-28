@@ -62,6 +62,7 @@ public class RecordService {
 
                 RecordEntity recordEntity = RecordEntity.builder()
                         .behaviorEntity(behaviorEntity)
+                        .googleUserEntity(googleUserEntity)
                         .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).toLocalDateTime()) // 한국 시간으로 설정
                         .build();
 
@@ -84,8 +85,7 @@ public class RecordService {
 
         List<RecordLogsDTO> recordLogsDTOList = new ArrayList<>();
 
-
-        List<RecordEntity>recordEntityList= recordRepository.findTodayRecordingdRecordEntitiesByGoogleUserId(googleUserEntity.getId());
+        List<RecordEntity>recordEntityList= recordRepository.findTodayRecordEntitiesByGoogleUserId(googleUserEntity.getId());
 
         recordLogsDTOList.addAll(
                 recordEntityList.stream()

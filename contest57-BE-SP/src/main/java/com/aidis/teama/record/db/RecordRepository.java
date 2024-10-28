@@ -11,9 +11,10 @@ import java.util.List;
 public interface RecordRepository extends JpaRepository<RecordEntity,Long> {
 
     @Query("SELECT r FROM recordTable r JOIN r.behaviorEntity b JOIN b.studentEntity s JOIN s.googleUser g "
-            + "WHERE g.id = :googleUserId AND b.status = 'recording' AND DATE(r.time) = CURRENT_DATE "
+            + "WHERE g.id = :googleUserId AND r.time >= CURRENT_DATE "
             + "ORDER BY r.time DESC")
-    List<RecordEntity> findTodayRecordingdRecordEntitiesByGoogleUserId(@Param("googleUserId") Long googleUserId);
+    List<RecordEntity> findTodayRecordEntitiesByGoogleUserId(@Param("googleUserId") Long googleUserId);
+
 
     @Query("SELECT r FROM recordTable r JOIN r.behaviorEntity b JOIN b.studentEntity s JOIN s.googleUser g "
             + "WHERE g.id = :googleUserId AND b.id = :behaviorId AND b.status = 'recording' "
