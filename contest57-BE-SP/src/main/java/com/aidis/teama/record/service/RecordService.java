@@ -7,6 +7,7 @@ import com.aidis.teama.record.db.RecordRepository;
 import com.aidis.teama.record.model.GraphDailyDTO;
 import com.aidis.teama.record.model.GraphDTO;
 import com.aidis.teama.record.model.RecordLogsDTO;
+import com.aidis.teama.record.model.TimeStampsDTO;
 import com.aidis.teama.student.db.StudentRepository;
 import com.aidis.teama.user.db.GoogleUserEntity;
 import com.aidis.teama.user.service.CustomUserDetailsService;
@@ -23,6 +24,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.hibernate.query.sqm.tree.SqmNode.log;
 
 @Service
 @Component
@@ -221,5 +224,12 @@ public class RecordService {
     }
 
 
+    public TimeStampsDTO getTimestamps(Long behaviorId) {
 
+        List<RecordEntity> recordEntityList= recordRepository.findAllByBehaviorEntityIdOrderByTimeDesc(behaviorId);
+
+        TimeStampsDTO timeStampsDTO= recordConverter.recordEntityToTimestamps(recordEntityList);
+        log.info(timeStampsDTO);
+return timeStampsDTO;
+    }
 }

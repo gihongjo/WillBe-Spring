@@ -4,6 +4,7 @@ import com.aidis.teama.record.db.RecordRepository;
 import com.aidis.teama.record.model.GraphDailyDTO;
 import com.aidis.teama.record.model.GraphDTO;
 import com.aidis.teama.record.model.RecordLogsDTO;
+import com.aidis.teama.record.model.TimeStampsDTO;
 import com.aidis.teama.record.service.RecordService;
 import com.aidis.teama.user.service.CustomUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
@@ -87,6 +88,16 @@ public class RecordController {
 
         LocalDate today = LocalDate.now(ZoneId.of("Asia/Seoul"));
         return recordService.getGraphMonthly(behavior_id, today);
+    }
+
+
+    @GetMapping(value = "/behavior/{behaviorId}/records")
+    public TimeStampsDTO getRecordTimestamps(
+            @PathVariable
+            String behaviorId
+    ){
+
+        return recordService.getTimestamps(Long.valueOf(behaviorId));
     }
 
 }

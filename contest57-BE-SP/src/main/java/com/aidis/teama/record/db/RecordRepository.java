@@ -39,4 +39,7 @@ public interface RecordRepository extends JpaRepository<RecordEntity,Long> {
             @Param("startDate") LocalDateTime startDate,
             @Param("endDate") LocalDateTime endDate);
 
+    List<RecordEntity> findAllByBehaviorEntityIdOrderByTimeDesc(Long behaviorEntityId);
+
+
 }

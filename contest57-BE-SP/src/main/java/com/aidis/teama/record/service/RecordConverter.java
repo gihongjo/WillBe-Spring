@@ -3,6 +3,7 @@ package com.aidis.teama.record.service;
 import com.aidis.teama.record.db.RecordEntity;
 import com.aidis.teama.record.model.GraphDailyDTO;
 import com.aidis.teama.record.model.RecordLogsDTO;
+import com.aidis.teama.record.model.TimeStampsDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -52,5 +54,18 @@ public class RecordConverter {
                 .build();
         return graphDailyDTO;
     }
+
+    public TimeStampsDTO recordEntityToTimestamps(List<RecordEntity> recordEntityList) {
+        // RecordEntity 리스트에서 LocalDateTime 리스트로 변환
+        List<LocalDateTime> timestamps = recordEntityList.stream()
+                .map(RecordEntity::getTime) // 각 RecordEntity의 time 필드 추출
+                .collect(Collectors.toList());
+
+        // TimeStampsDTO에 변환된 timestamps를 설정하여 반환
+        return TimeStampsDTO.builder()
+                .timestampes(timestamps)
+                .build();
+    }
+
 
 }
