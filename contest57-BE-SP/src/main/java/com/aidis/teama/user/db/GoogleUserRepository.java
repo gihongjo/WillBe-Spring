@@ -16,3 +16,5 @@ public interface GoogleUserRepository extends JpaRepository<GoogleUserEntity, Lo
     boolean findByEmailAndCheckStudentExist(@Param("googleUserEntity") GoogleUserEntity googleUserEntity);
 
 }
+
+
